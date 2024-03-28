@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lugaa</title>
     <link rel="stylesheet" href="main.css">
+    <script src="script.js" defer></script>
 </head>
 
 <body>
@@ -40,169 +41,200 @@
                         <img src="images/rectangle1.png" alt="rectangle ">
                     </div>
                 </div>
-                <a href="login.html" id="login-link">
-                    <div class="usericon">
-                        <img src="images/usericon.png" alt="usericon">
-                    </div>
-                </a>
+                <div class="usericon" id="usericon">
+                    <img src="images/usericon.png" alt="usericon">
+                </div>
+
             </div>
         </div>
-        <section class="main-section">
-            <!-- Catchphrase Section -->
-            <div class="catchphrase">
-                <span class="a-new-style-everyday">
+        <!-- Login popup -->
+        <div class="overlay" id="overlay">
+            <div class="login-container">
+
+                <h2>Login</h2>
+                <form>
+                    <div class="input-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn">Login</button>
+                </form>
+                <div class="google-signin">
+                    <button class="btn-google">Sign In with Google</button>
+                </div>
+                <!-- Close button for the popup -->
+                <button class="close-btn" id="close-btn">&times;</button>
+
+                
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+    </div>
+    <section class="main-section">
+        <!-- Catchphrase Section -->
+        <div class="catchphrase">
+            <span class="a-new-style-everyday">
+                A New Style Everyday
+            </span>
+        </div>
+        <!-- Latest Section -->
+        <div class="lastest">
+            <div class="firstp">
+                <div class="image-1">
+                    <img src="images/image1.jpeg" alt="SweatShirt (Brown)">
+                </div>
+                <div class="product-info">
+                    <span class="product-name">SweatShirt (Brown)</span>
+                    <span class="product-price">Rs 2,000.00</span>
+                </div>
+            </div>
+            <div class="secondp">
+                <div class="image-2">
+                    <img src="images/image2.jpeg" alt="Hoodie (Black)">
+                </div>
+                <div class="product-info">
+                    <span class="product-name">Hoodie (Black)</span>
+                    <span class="product-price">Rs 2,000.00</span>
+                </div>
+            </div>
+            <div class="thirdp">
+                <div class="image-3">
+                    <img src="images/image3.jpeg" alt="Joggers (Grey)">
+                </div>
+                <div class="product-info">
+                    <span class="product-name">Joggers (Grey)</span>
+                    <span class="product-price">Rs 2,000.00</span>
+                </div>
+            </div>
+        </div>
+        <!-- About Section -->
+        <div class="aboutsection">
+            <div class="astext">
+                <div class="about-us">
+                    About Us
+                </div>
+                <span class="about-luga">
+                    &#34;Luga: Your ultimate online shopping destination. Explore curated collections across
+                    fashion,
+                    electronics, home goods, and more. Our sleek design and intuitive features ensure a seamless
+                    browsing experience. Discover convenience, style, and satisfaction with Luga.&#34;
+                </span>
+            </div>
+            <div class="modelimg">
+                <img src="images/modeling.jpeg" alt="model">
+
+            </div>
+        </div>
+        <!-- Review Section -->
+        <div class="review-container">
+            <div class="review-card">
+                <img src="profile1.jpg" alt="John Doe Profile Picture">
+                <div class="review-content">
+                    <div class="reviewer">John Doe</div>
+                    <div class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <div class="review-text">Great quality clothing, fast shipping, and excellent customer service.
+                        Highly recommended!</div>
+                </div>
+            </div>
+
+            <div class="review-card">
+                <img src="profile2.jpg" alt="Jane Smith Profile Picture">
+                <div class="review-content">
+                    <div class="reviewer">Jane Smith</div>
+                    <div class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+                    <div class="review-text">I love the designs and the fabric quality, but shipping took longer
+                        than expected.</div>
+                </div>
+            </div>
+
+            <div class="review-card">
+                <img src="profile3.jpg" alt="Michael Johnson Profile Picture">
+                <div class="review-content">
+                    <div class="reviewer">Michael Johnson</div>
+                    <div class="star-rating">&#9733;&#9733;&#9733;&#9734;&#9734;</div>
+                    <div class="review-text">Good value for the price. However, the sizing runs a bit small, so I
+                        recommend ordering a size up.</div>
+                </div>
+            </div>
+        </div>
+        <!-- Login Section  -->
+        <!-- Login popup -->
+
+    </section>
+    <!-- Footer Section -->
+    <div class="footer">
+        <div class="line-2">
+        </div>
+        <div class="container-6">
+            <div class="footerlogo">
+                <div class="logo-1">
+                    <img src="images/logo221.png" alt="flogo">
+                </div>
+                <span class="a-new-style-everyday-2">
                     A New Style Everyday
                 </span>
             </div>
-            <!-- Latest Section -->
-            <div class="lastest">
-                <div class="firstp">
-                    <div class="image-1">
-                        <img src="images/image1.jpeg" alt="SweatShirt (Brown)">
+            <div class="contact">
+                <div class="contact-us-3">
+                    Contact Us
+                </div>
+                <div class="container-7">
+                    <div class="pin-1">
+                        <img src="images/pin1.png" alt="location">
                     </div>
-                    <div class="product-info">
-                        <span class="product-name">SweatShirt (Brown)</span>
-                        <span class="product-price">Rs 2,000.00</span>
+                    <div class="kathmandu-nepal">
+                        Kathmandu, Nepal
                     </div>
                 </div>
-                <div class="secondp">
-                    <div class="image-2">
-                        <img src="images/image2.jpeg" alt="Hoodie (Black)">
+                <div class="container">
+                    <div class="phone-call-1">
+                        <img src="images/phoneCall1.png" alt="phone">
                     </div>
-                    <div class="product-info">
-                        <span class="product-name">Hoodie (Black)</span>
-                        <span class="product-price">Rs 2,000.00</span>
-                    </div>
-                </div>
-                <div class="thirdp">
-                    <div class="image-3">
-                        <img src="images/image3.jpeg" alt="Joggers (Grey)">
-                    </div>
-                    <div class="product-info">
-                        <span class="product-name">Joggers (Grey)</span>
-                        <span class="product-price">Rs 2,000.00</span>
+                    <div class="phonenumber">
+                        9876543210
                     </div>
                 </div>
-            </div>
-            <!-- About Section -->
-            <div class="aboutsection">
-                <div class="astext">
-                    <div class="about-us">
-                        About Us
+                <div class="container-11">
+                    <div class="email-1">
+                        <img src="images/email1.png" alt="mail">
                     </div>
-                    <span class="about-luga">
-                        &#34;Luga: Your ultimate online shopping destination. Explore curated collections across
-                        fashion,
-                        electronics, home goods, and more. Our sleek design and intuitive features ensure a seamless
-                        browsing experience. Discover convenience, style, and satisfaction with Luga.&#34;
-                    </span>
-                </div>
-                <div class="modelimg">
-                    <img src="images/modeling.jpeg" alt="model">
-
-                </div>
-            </div>
-            <!-- Review Section -->
-            <div class="review-container">
-                <div class="review-card">
-                    <img src="profile1.jpg" alt="John Doe Profile Picture">
-                    <div class="review-content">
-                        <div class="reviewer">John Doe</div>
-                        <div class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                        <div class="review-text">Great quality clothing, fast shipping, and excellent customer service.
-                            Highly recommended!</div>
-                    </div>
-                </div>
-
-                <div class="review-card">
-                    <img src="profile2.jpg" alt="Jane Smith Profile Picture">
-                    <div class="review-content">
-                        <div class="reviewer">Jane Smith</div>
-                        <div class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
-                        <div class="review-text">I love the designs and the fabric quality, but shipping took longer
-                            than expected.</div>
-                    </div>
-                </div>
-
-                <div class="review-card">
-                    <img src="profile3.jpg" alt="Michael Johnson Profile Picture">
-                    <div class="review-content">
-                        <div class="reviewer">Michael Johnson</div>
-                        <div class="star-rating">&#9733;&#9733;&#9733;&#9734;&#9734;</div>
-                        <div class="review-text">Good value for the price. However, the sizing runs a bit small, so I
-                            recommend ordering a size up.</div>
+                    <div class="lugaagmail-com">
+                        lugaa@gmail.com
                     </div>
                 </div>
             </div>
+            <div class="stayconnected">
+                <div class="stay-connected">
+                    Stay Connected
+                </div>
+                <div class="container-9">
+                    <div class="instagram-1">
+                        <img src="images/instagram1.png" alt="instagram">
 
-        </section>
-        <!-- Footer Section -->
-        <div class="footer">
-            <div class="line-2">
-            </div>
-            <div class="container-6">
-                <div class="footerlogo">
-                    <div class="logo-1">
-                        <img src="images/logo221.png" alt="flogo">
                     </div>
-                    <span class="a-new-style-everyday-2">
-                        A New Style Everyday
-                    </span>
-                </div>
-                <div class="contact">
-                    <div class="contact-us-3">
-                        Contact Us
-                    </div>
-                    <div class="container-7">
-                        <div class="pin-1">
-                            <img src="images/pin1.png" alt="location">
-                        </div>
-                        <div class="kathmandu-nepal">
-                            Kathmandu, Nepal
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="phone-call-1">
-                            <img src="images/phoneCall1.png" alt="phone">
-                        </div>
-                        <div class="phonenumber">
-                            9876543210
-                        </div>
-                    </div>
-                    <div class="container-11">
-                        <div class="email-1">
-                            <img src="images/email1.png" alt="mail">
-                        </div>
-                        <div class="lugaagmail-com">
-                            lugaa@gmail.com
-                        </div>
-                    </div>
-                </div>
-                <div class="stayconnected">
-                    <div class="stay-connected">
-                        Stay Connected
-                    </div>
-                    <div class="container-9">
-                        <div class="instagram-1">
-                            <img src="images/instagram1.png" alt="instagram">
+                    <div class="facebook-1">
+                        <img src="images/facebook1.png" alt="facebook">
 
-                        </div>
-                        <div class="facebook-1">
-                            <img src="images/facebook1.png" alt="facebook">
-
-                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="container-10">
-                <div class="copyright-1">
-                    <img src="images/copyright1.png" alt="copyright">
-                </div>
-                <div class="lugaa">
-                    2024 Lugaa
                 </div>
             </div>
         </div>
+        <div class="container-10">
+            <div class="copyright-1">
+                <img src="images/copyright1.png" alt="copyright">
+            </div>
+            <div class="lugaa">
+                2024 Lugaa
+            </div>
+        </div>
+    </div>
     </div>
 </body>
 

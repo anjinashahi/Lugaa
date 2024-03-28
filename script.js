@@ -1,23 +1,20 @@
-// script.js
-
 document.addEventListener('DOMContentLoaded', function () {
-    const userIcon = document.getElementById('usericon');
     const overlay = document.getElementById('overlay');
     const closeButton = document.getElementById('close-btn');
+    const loginContainer = document.querySelector('.login-container');
 
-    // Function to show the login popup
-    function showLoginPopup() {
-        overlay.style.display = 'block';
+    // Function to toggle the login popup
+    function toggleLoginPopup() {
+        overlay.style.display = overlay.style.display === 'block' ? 'none' : 'block';
     }
 
-    // Function to hide the login popup
-    function hideLoginPopup() {
-        overlay.style.display = 'none';
-    }
+    // Event listener to show/hide the login popup when the close button is clicked
+    closeButton.addEventListener('click', toggleLoginPopup);
 
-    // Event listener for user icon click
-    userIcon.addEventListener('click', showLoginPopup);
-
-    // Event listener for close button click
-    closeButton.addEventListener('click', hideLoginPopup);
+    // Event listener to hide the login popup when clicking outside the login container
+    overlay.addEventListener('click', function (event) {
+        if (event.target === overlay) {
+            toggleLoginPopup();
+        }
+    });
 });

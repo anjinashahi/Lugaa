@@ -1,0 +1,99 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.login-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100vh;
+}
+.wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height:440px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    
+}
+
+/* Close button styling */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    padding: 5px;
+    font-size: 18px;
+    color: #999;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+
+
+/* Styles for form input fields */
+.input-box {
+    margin-bottom: 15px;
+}
+
+.input-box label {
+    display: block;
+    margin-bottom: 8px; /* Adjusted margin */
+    color: #333;
+}
+
+.input-box input[type="email"],
+.input-box input[type="password"] {
+    width: 100%;
+    padding: 12px; /* Increased padding */
+    border: 1px solid #ddd;
+    border-radius: 6px; /* Adjusted border-radius */
+    transition: border-color 0.3s ease;
+}
+
+.input-box input[type="email"]:focus,
+.input-box input[type="password"]:focus {
+    border-color: #007bff;
+}
+
+/* Button styles */
+.btn,
+.btn-google {
+    padding: 12px 24px; /* Increased padding */
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 6px; /* Adjusted border-radius */
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease; /* Added transform transition */
+}
+
+.btn:hover,
+.btn-google:hover {
+    transform: scale(1.05);
+}
+
+.btn-google {
+    background-color: #db4437;
+    margin-top: 10px;
+}
+
+.btn-google:hover {
+    background-color: #c1351d;
+}

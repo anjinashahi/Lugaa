@@ -17,7 +17,8 @@
     position: relative;
     display: flex;
     align-items: center;
-    padding: 59px 63px 48px 0;
+    justify-content: space-between;
+    /* padding: 59px 63px 48px 0; */
     /* width: 1440px; */
     width: 100%;
     box-sizing: border-box;
@@ -33,17 +34,16 @@
 
 .logo {
     border-radius: 25px;
-    position: absolute;
-    left: 37px;
-    top: -43px;
     width: 250px;
-    height: 250px;
+    height: 100px;
+    overflow: hidden;
+    object-fit: cover;
+
 }
 
 .logo img {
-    width: 100%;
+    /* width: 100%; */
     height: 100%;
-    object-fit: cover;
     border-radius: 25px;
 }
 
@@ -73,7 +73,6 @@
     width: 329px;
     height: fit-content;
     box-sizing: border-box;
-    margin-left: 382px;
 }
 
 .nav span {
@@ -91,18 +90,17 @@
     margin-bottom: 8px;
 
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     /* width: 995px; */
     box-sizing: border-box;
 }
 
 .line-1 {
     background: #000000;
-    margin-right: 800px;
+    /* margin-right: 800px; */
     align-self: center;
     width: 325px;
     height: 1px;
-    margin-left: 382px;
 
 }
 

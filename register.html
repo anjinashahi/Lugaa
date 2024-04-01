@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="login.css">
+    <title>Register</title>
+    <link rel="stylesheet" href="register.css">
 </head>
 
 <body>
@@ -13,40 +13,46 @@
         <a href="index.html" class="icon-close">
             <ion-icon name="close-outline"></ion-icon>
         </a>
-        <div class="form-box login">
-            <h2>Login</h2>
+        <div class="form-box register">
+            <h2>Registration</h2>
             <form action="#">
                 <div class="input-box">
-                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                    <span class="icon">
+                        <ion-icon name="person"></ion-icon>
+                    </span>
+                    <input type="text" required>
+                    <label>Username</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="mail"></ion-icon>
+                    </span>
                     <input type="email" required>
                     <label>Email</label>
                 </div>
                 <div class="input-box">
-                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                    <span class="icon">
+                        <ion-icon name="lock-closed"></ion-icon>
+                    </span>
                     <input type="password" required>
                     <label>Password</label>
                 </div>
                 <div class="remember-forget">
-                    <label><input type="checkbox"> Remember me </label>
-                    <a href="#">Forget Password?</a>
+                    <label><input type="checkbox">
+                        I agree to the terms & conditions
+                    </label>
                 </div>
-                <button type="submit" class="btn">Login</button>
+                <button type="submit" class="btn">Register</button>
                 <div class="login-register">
-                    <p>Don't have an account?
-                        <a href="register.html" class="register-link">
-                            Register
+                    <p>Already have an account?
+                        <a href="login.html" class="login-link">
+                            Login
                         </a>
                     </p>
                 </div>
             </form>
-            <div class="google-signin">
-                    <button class="btn-google">Sign In with Google</button>
-                </div>
         </div>
     </div>
-
-
-    <script src="script.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

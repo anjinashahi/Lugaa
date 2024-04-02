@@ -216,14 +216,25 @@ body {
     text-decoration: underline;
 }
 
+.google-signin {
+    text-align: center; 
+    margin-top: 20px; 
+    align-items: center;
+}
+
 .btn-google {
+    justify-content: center;
     padding: 12px 24px;
-    background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 6px;
     cursor: pointer;
     transition: transform 0.2s ease, background-color 0.3s ease;
+   
+}
+
+.btn-google ion-icon {
+    margin-right: 10px; 
 }
 
 .btn:hover,

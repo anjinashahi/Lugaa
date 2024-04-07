@@ -73,8 +73,12 @@
     /* width: 329px; */
     height: fit-content;
     box-sizing: border-box;
+    
 }
 
+.nav a{
+    text-decoration: none;
+}
 .nav span {
 
     font-family: 'Sans Serif Collection', 'Roboto Condensed';
@@ -135,7 +139,7 @@
 /* Discount Section */
 .discounted-section {
     text-align: center;
-    margin-top: 25px;
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 

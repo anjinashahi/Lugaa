@@ -36,6 +36,24 @@ textarea {
   grid-template-columns: repeat(2, 1fr);
 }
 
+.contact-form .icon-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 45px;
+  height: 45px;
+  background: #fff;
+  font-size: 2em;
+  color: #162938;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom-left-radius: 20px;
+  cursor: pointer;
+  z-index: 10001;
+
+}
+
 .contact-form {
   background-color: #333;
   position: relative;
@@ -43,7 +61,6 @@ textarea {
 
 .circle {
   border-radius: 50%;
-  /* background: linear-gradient(135deg, transparent 20%, #149279); */
   background: linear-gradient(135deg, transparent 20%, #fff);
   position: absolute;
 }
@@ -176,7 +193,8 @@ textarea.input {
   opacity: 0;
   transition: 0.3s;
   height: 5px;
-  background-color: #1abc9c;
+  /* background-color: #1abc9c; */
+  background-color: #333;
   top: 50%;
   transform: translateY(-50%);
 }

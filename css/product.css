@@ -179,7 +179,7 @@ body {
   /* Filter panel styles */
   
   .filter-panel {
-    position: ;
+    /* position: ; */
      font-size: 62.5%;
     top: 120px;
     left: 0;
@@ -391,7 +391,7 @@ body{
 .products-preview .preview .price{
    padding:1rem 0;
    font-size: 2rem;
-   color:#27ae60;
+   color:#333;
 }
 
 .products-preview .preview .buttons{

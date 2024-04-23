@@ -99,6 +99,8 @@ body {
     padding: 0 20px;
     display: flex;
   } 
+
+  /* Content */
   .product-section {
      max-width: 1200px;
      margin: 20px auto;

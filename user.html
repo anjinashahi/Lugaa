@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
     <link rel="stylesheet" href="CSS/user.css">
 </head>
+
 <body>
     <header>
         <h1>User Profile</h1>
@@ -17,44 +19,36 @@
                 <img src="images/user-2.png" alt="Profile Picture" width="100"><br>
                 <p>Name: John Doe</p>
                 <p>Email: john@example.com</p>
-                <!-- <div class="dropdown">
+                <div class="dropdown">
                     <button id="edit-profile-btn" class="dropbtn">Edit Profile</button>
-                    <div id="edit-profile-dropdown" class="dropdown-content">
-                        <a href="#" id="edit-username">Edit Username</a>
-                        <a href="#" id="edit-email">Edit Email</a>
-                    </div>
-                </div> -->
-            
-            <section id="edit-profile" class="popup-section">
-                <!-- <h2></h2> -->
-                <button id="edit-profile-btn" class="popup-btn">Edit Profile</button>
-                <div id="edit-profile-form" class="popup-content">
-                    <!-- <section id="edit-profile"> -->
-                        <!-- <h2>Edit Profile</h2> -->
+                </div>
+                <section id="edit-profile" class="popup-section">
+                    <div id="edit-profile-form" class="popup-content">
+                        
                         <form id="edit-profile-form">
                             <label for="profile-image">Profile Image:</label><br>
                             <input type="file" id="profile-image" name="profile-image"><br>
-                    
+
                             <label for="name">Name:</label><br>
                             <input type="text" id="name" name="name"><br>
-                    
+
                             <label for="location">Location:</label><br>
                             <input type="text" id="location" name="location"><br>
-                    
+
                             <label for="email">Email:</label><br>
                             <input type="email" id="email" name="email"><br>
-                    
+
                             <label for="phone">Phone:</label><br>
                             <input type="tel" id="phone" name="phone"><br>
-                    
+
                             <button type="submit">Save Changes</button>
                         </form>
-                    <!-- </section> -->
-                    
-                </div>
+                        
+
+                    </div>
+                </section>
             </section>
-        </section>
-              
+
             <section id="order-history">
                 <h2>Order History</h2>
                 <ul>
@@ -76,8 +70,9 @@
                 <button>Logout</button>
             </section>
         </div>
-        
+
     </div>
     <script src="js/user.js"></script>
 </body>
+
 </html>

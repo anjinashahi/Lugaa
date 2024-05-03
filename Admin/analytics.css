@@ -1,0 +1,33 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+html{
+    height: 100%;
+}
+body{
+    height: 100%;
+}
+     
+/* CSS for the first div */
+     #productChartmain-container {
+        width: 400px; /* Adjust the width as needed */
+        height: 300px; /* Adjust the height as needed */
+    }
+    
+    /* CSS for the second div */
+    #pendingOrdersmain-container {
+        margin-top: 70px; /* Adjust the margin-top as needed */
+    }
+    
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    /* CSS for the delivered orders */
+    .delivered {
+        background-color: lightgreen;
+    }

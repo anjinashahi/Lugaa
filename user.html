@@ -3,91 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lugaa | User</title>
-    <link rel="stylesheet" href="css/user.css">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="CSS/user.css">
 </head>
 <body>
-    <div class="header">
-        <div class="logo">
-            <a href="index.html"><img src="images/logo221.png" alt="Logo"></a>
-        </div>
-        <div class="nav-bar">
-            <div class="nav">
-                <span>
-                    <a href="index.html">Home</a>
-                </span>
-                <span>
-                   <a href="product.html">Products</a>
-                </span>
-                <span>
-                    <a href="contactus.html">Contact Us</a>
-                </span>
-            </div>
-            <div class="line-1"></div>
-        </div>
-        <div class="topright">
-            <div class="search">
-                <ion-icon name="search"></ion-icon>
-            </div>
-            <div class="cart-group">
-                <ion-icon name="cart-outline"></ion-icon>
-            </div>
-            <div class="usericon">
-                <a href="login.html">
-                    <ion-icon name="person-circle-outline"></ion-icon>
-                </a>
-            </div>
-        </div>
-    </div>
-    
-    
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-lg-3 my-lg-0 my-md-1">
-                <div id="sidebar" class="bg-purple">
-                    <div class="h4 text-white">Account</div>
-                    <ul>
-                        <li class="active">
-                            <a href="#" class="text-decoration-none d-flex align-items-start">
-                                <div class="fas fa-box-open pt-2 me-3"></div>
-                                <div class="d-flex flex-column">
-                                    <div class="link">My Orders</div>
-                                    <div class="link-desc">View & Manage orders and returns</div>
-                                </div>
-                            </a>
-                            
-                        </li>
-                        <li>
-                            <a href="#" class="text-decoration-none d-flex align-items-start">
-                                <div class="fas fa-box pt-2 me-3"></div>
-                                <div class="d-flex flex-column">
-                                    <div class="link">My Account</div>
-                                    <div class="link-desc">View & Manage orders and returns</div>
-                                </div>
-                            </a>
-                        </li>
-                      
-                        <li>
-                            <a href="#" class="text-decoration-none d-flex align-items-start">
-                                <div class="far fa-user pt-2 me-3"></div>
-                                <div class="d-flex flex-column">
-                                    <div class="link">My Profile</div>
-                                    <div class="link-desc">Change your profile details & password</div>
-                                </div>
-                            </a>
-                        </li>
-                        
-                    </ul>
-                </div>
-            </div>
+    <header>
+        <h1>User Profile</h1>
+    </header>
+    <div class="container">
+        <div class="profile-section">
+            <section id="user-profile">
+                <h2>User Profile</h2>
+                <img src="images/user-2.png" alt="Profile Picture" width="100"><br>
+                <p>Name: John Doe</p>
+                <p>Email: john@example.com</p>
+                <!-- <div class="dropdown">
+                    <button id="edit-profile-btn" class="dropbtn">Edit Profile</button>
+                    <div id="edit-profile-dropdown" class="dropdown-content">
+                        <a href="#" id="edit-username">Edit Username</a>
+                        <a href="#" id="edit-email">Edit Email</a>
+                    </div>
+                </div> -->
             
+            <section id="edit-profile" class="popup-section">
+                <!-- <h2></h2> -->
+                <button id="edit-profile-btn" class="popup-btn">Edit Profile</button>
+                <div id="edit-profile-form" class="popup-content">
+                    <!-- <section id="edit-profile"> -->
+                        <!-- <h2>Edit Profile</h2> -->
+                        <form id="edit-profile-form">
+                            <label for="profile-image">Profile Image:</label><br>
+                            <input type="file" id="profile-image" name="profile-image"><br>
+                    
+                            <label for="name">Name:</label><br>
+                            <input type="text" id="name" name="name"><br>
+                    
+                            <label for="location">Location:</label><br>
+                            <input type="text" id="location" name="location"><br>
+                    
+                            <label for="email">Email:</label><br>
+                            <input type="email" id="email" name="email"><br>
+                    
+                            <label for="phone">Phone:</label><br>
+                            <input type="tel" id="phone" name="phone"><br>
+                    
+                            <button type="submit">Save Changes</button>
+                        </form>
+                    <!-- </section> -->
+                    
+                </div>
+            </section>
+        </section>
+              
+            <section id="order-history">
+                <h2>Order History</h2>
+                <ul>
+                    <li>Order #1234 - Product A, Product B</li>
+                    <li>Order #5678 - Product C</li>
+                    <li>Order #91011 - Product D, Product E, Product F</li>
+                </ul>
+            </section>
+            <section id="refund">
+                <h2>Refund Status</h2>
+                <ul>
+                    <li>Order #1234 - Product A, Product B</li>
+                    <li>Order #5678 - Product C</li>
+                    <li>Order #91011 - Product D, Product E, Product F</li>
+                </ul>
+            </section>
+            <section id="logout">
+                <h2></h2>
+                <button>Logout</button>
+            </section>
         </div>
-    
+        
     </div>
-
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
+    <script src="js/user.js"></script>
 </body>
 </html>
-

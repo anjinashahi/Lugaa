@@ -1,22 +1,22 @@
-let preveiwmain-container = document.querySelector('.products-preview');
-let previewBox = preveiwmain-container.querySelectorAll('.preview');
+document.addEventListener("DOMContentLoaded", () => {
+  let editProfileBtn = document.getElementById("edit-profile-btn");
+  let editProfileModal = document.getElementById("edit-profile-modal");
+  let closeModal = document.getElementsByClassName("close")[0];
 
-document.querySelectorAll('.product-row .product').forEach(product =>{
-  product.onclick = () =>{
-    preveiwmain-container.style.display = 'flex';
-    let name = product.getAttribute('data-name');
-    previewBox.forEach(preview =>{
-      let target = preview.getAttribute('data-target');
-      if(name == target){
-        preview.classList.add('active');
+  // Show modal when the button is clicked
+  editProfileBtn.addEventListener("click", () => {
+      editProfileModal.style.display = "block";
+  });
+
+  // Hide modal when the close button is clicked
+  closeModal.addEventListener("click", () => {
+      editProfileModal.style.display = "none";
+  });
+
+  // Hide modal when user clicks outside of it
+  window.addEventListener("click", (event) => {
+      if (event.target == editProfileModal) {
+          editProfileModal.style.display = "none";
       }
-    });
-  };
-});
-
-previewBox.forEach(close =>{
-  close.querySelector('.fa-times').onclick = () =>{
-    close.classList.remove('active');
-    preveiwmain-container.style.display = 'none';
-  };
+  });
 });

@@ -1,9 +1,12 @@
-document.getElementById('checkout-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the form from submitting
-    
-    // Perform any necessary validation here
-    
-    // If validation passes, redirect to a success page
-    window.location.href = 'success.html';
+// checkout.js
+
+document.addEventListener('DOMContentLoaded', function() {
+  const placeOrderButton = document.querySelector('.place-order');
+
+  placeOrderButton.addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the default form submission behavior
+
+    // Show a confirmation alert
+    alert('Your order has been placed successfully!');
   });
-  
+});

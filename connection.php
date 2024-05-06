@@ -1,2 +1,2 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "colab_test");
+$conn = mysqli_connect("localhost", "root", "", "collab_main");

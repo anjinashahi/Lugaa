@@ -18,7 +18,9 @@ if(isset($_POST['submit'])){
     $email = $_POST["email"];
     $password = $_POST["password"];
     $confirmpassword = $_POST["confirmpassword"];
+    $location = $_POST["location"];
 
+    
     $query = "INSERT INTO users_test2(fullname, phonenumber, email, password, confirmpassword) VALUES('$fullname', '$phonenumber', '$email', '$password', '$confirmpassword')";
     mysqli_query($conn, $query);
 
@@ -38,7 +40,7 @@ if(isset($_POST['submit'])){
 
 <body>
     <div class="wrapper">
-        <a href="index.html" class="icon-close">
+        <a href="index.php" class="icon-close">
             <ion-icon name="close-outline"></ion-icon>
         </a>
         <div class="form-box register">
@@ -79,6 +81,13 @@ if(isset($_POST['submit'])){
                     <input type="password" name="confirmpassword" id="confirmpassword" required>
                     <label>Confirm Password</label>
                 </div>
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="lock-closed"></ion-icon>
+                    </span>
+                    <input type="text" name="location" id="location" required>
+                    <label>Confirm Password</label>
+                </div>
                 <div class="remember-forget">
                     <label><input type="checkbox">
                         I agree to the terms & conditions
@@ -87,7 +96,7 @@ if(isset($_POST['submit'])){
                 <button type="submit" name="submit" id="submit" class="btn">Register</button>
                 <div class="login-register">
                     <p>Already have an account?
-                        <a href="login.html" class="login-link">
+                        <a href="login.php" class="login-link">
                             Login
                         </a>
                     </p>

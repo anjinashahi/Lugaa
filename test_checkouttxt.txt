@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Page</title>
+</head>
+<body>
+
+<div id="selectedSize"></div>
+<div id="selectedQuantity"></div>
+<div id="description"></div>
+<div id="actual_price"></div>
+<div id="discouted_price"></div>
+<script>
+    // Retrieve size and quantity from URL parameters
+    var urlParams = new URLSearchParams(window.location.search);
+    var size = urlParams.get('size');
+    var quantity = urlParams.get('quantity');
+    var description = urlParams.get('description');
+    var acutal_price = urlParams.get('actual_price');
+    var discounted_price = urlParams.get('discounted_price');
+    
+
+    // Display size and quantity in div elements
+    document.getElementById('selectedSize').innerText = "Selected Size: " + size;
+    document.getElementById('selectedQuantity').innerText = "Selected Quantity: " + quantity;
+</script>
+
+</body>
+</html>
+
+<?php
+// echo '
+// <div id="selectedSize"></div>
+// <div id="selectedQuantity"></div>
+// <div id="description"></div>
+// <div id="actual_price"></div>
+// <div id="discounted_price"></div>
+// <script>
+//     // Retrieve size and quantity from URL parameters
+//     var urlParams = new URLSearchParams(window.location.search);
+//     var size = urlParams.get(\'size\');
+//     var quantity = urlParams.get(\'quantity\');
+//     var description = urlParams.get(\'description\');
+//     var actual_price = urlParams.get(\'actual_price\');
+//     var discounted_price = urlParams.get(\'discounted_price\');
+
+//     // Display size, quantity, description, actual price, and discounted price in div elements
+//     document.getElementById(\'selectedSize\').innerText = "Selected Size: " + size;
+//     document.getElementById(\'selectedQuantity\').innerText = "Selected Quantity: " + quantity;
+//     document.getElementById(\'description\').innerText = "Description: " + description;
+//     document.getElementById(\'actual_price\').innerText = "Actual Price: $" + actual_price;
+//     document.getElementById(\'discounted_price\').innerText = "Discounted Price: $" + discounted_price;
+// </script>
+// ';
+?>
+for display with color
+<?php
+// Retrieve values from the URL parameters
+$size = $_GET['size'];
+$quantity = $_GET['quantity'];
+$description = $_GET['description'];
+$actual_price = $_GET['actual_price'];
+$color = $_GET['color'];
+$discounted_price = $_GET['discounted_price'];
+
+// Output the retrieved information
+echo "<h2>Checkout Information</h2>
+      <p><strong>Size:</strong> $size</p>
+      <p><strong>Quantity:</strong> $quantity</p>
+      <p><strong>Description:</strong> $description</p>
+      <p><strong>Actual Price:</strong> $actual_price</p>
+      <p><strong>Color:</strong> $color</p>
+      <p><strong>Discounted Price:</strong> $discounted_price</p>";
+
+// Additional processing or actions related to checkout can be performed here
+?>
+
+
+
+
+  

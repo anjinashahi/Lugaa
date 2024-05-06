@@ -74,6 +74,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel = "stylesheet " href="./index.css">
     <link rel = "stylesheet " href="./analytics.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -106,9 +107,15 @@ $conn->close();
         <div class= "left">
             <nav>
                 <ul class="">
+                <li class="admin-login">
+                    <div class="admin-info">
+                        <div class="admin-photo">
+                        <!-- <img src="admin.webp" alt="Admin Photo"> -->
+                        </div>
+                        <div class="admin-name">Hello, Admin</div>
+                    </div>
                     <li> <a href = "http://localhost/Lugaa/admin/analytics.php">Analytics</a></li>
                     <li> <a href = "http://localhost/Lugaa/admin/seller.php">Seller</a></li>
-                    <li> <a href = "">Categories</a></li>
                     <li> <a href = "http://localhost/Lugaa/admin/product.php">Product</a></li>
                     <li> <a href = "finance.php">Finance</a></li>
                 </ul>
@@ -150,7 +157,7 @@ $conn->close();
         <!-- Pending Orders -->
         <div id="pendingOrdersmain-container">
             <h1>Pending Orders</h1>
-            <table>
+            <table class= "table table-stripped">
                 <tr>
                     <th>Order ID</th>
                     <th>Customer ID</th>

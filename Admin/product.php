@@ -68,8 +68,9 @@ if(isset($_POST["submit"])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Upload </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel = "stylesheet " href="./product.css">
-    <style>
+    <!-- <style>
         body{
             display: flex;
             justify-content: center;
@@ -77,49 +78,76 @@ if(isset($_POST["submit"])){
             flex-direction: column;
             min-height: 100vh;
         }
-    </style>
+    </style> -->
 </head>
 <body>
-    <div class= "main-main-container">
+    <div class= "main-container">
     <div class="left">
     <nav>
         <ul class="">
-        <li> <a href = "http://localhost/colab/alaytics.php">Analytics</a></li>
-        <li> <a href = "http://localhost/colab/seller.php">Seller</a></li>
-        <li> <a href = "">Categories</a></li>
-        <li> <a href = "http://localhost/colab/lugaNewarrivalUpload.php">Product</a></li>
-        <li> <a href = "">Finance</a></li>
+        <ul class="">
+                <li class="admin-login">
+                    <div class="admin-info">
+                        <div class="admin-photo">
+                        <!-- <img src="admin.webp" alt="Admin Photo"> -->
+                        </div>
+                        <div class="admin-name">Hello, Admin</div>
+                    </div>
+                </li>
+                <li> <a href = "http://localhost/Lugaa/admin">Analytics</a></li>
+                    <li> <a href = "http://localhost/Lugaa/admin/seller.php">Seller</a></li>
+                    <li> <a href = "http://localhost/Lugaa/admin/product.php">Product</a></li>
+                    <li> <a href = "finance.php">Finance</a></li>
         </ul>
     </nav>
     </div>
     <div class = "right">
-    <form
-    class = ""
-    action=""
-    method = "post"
-    autocomplete="off"
-    enctype = "multipart/form-data"
-    >
-    <label for="name">Name :</label>
-    <input type="text" name = "name" id = "name" required value = "">
-    <br>
-    <label for="product_key">Product Key :</label>
-    <input type="text" name = "product_key" id = "product_key" required value = "">
-    <br>
-    <label for="act_price">Actual Price :</label>
-    <input type="text" name = "act_price" id = "act_price" required value = "">
-    <br>
-    <label for="discounted_price">Discounted Price :</label>
-    <input type="text" name = "discounted_price" id = "discounted_price" required value = "">
-    <br>
-    <label for = "image"> Image : </label>
-    <input type="file" name = "image" id = "image" accept=".jpg, .jpeg, .png" value=""> <br>
-    
-    <button type = "submit" name = "submit">submit</button> 
-    <br>
-    </form>
-    <br>
-    <a href="productpageLuga.php">Data</a>
+        <form
+            class = ""
+            action=""
+            method = "post"
+            autocomplete="off"
+            enctype = "multipart/form-data">
+        <!-- <label for="name">Name :</label>
+        <input type="text" name = "name" id = "name" required value = "">
+        <br> -->
+        <!-- <label for="product_key">Product Key :</label>
+        <input type="text" name = "product_key" id = "product_key" required value = "">
+        <br>
+        <label for="act_price">Actual Price :</label>
+        <input type="text" name = "act_price" id = "act_price" required value = "">
+        <br>
+        <label for="discounted_price">Discounted Price :</label>
+        <input type="text" name = "discounted_price" id = "discounted_price" required value = "">
+        <br>
+        <label for = "image"> Image : </label>
+        <input type="file" name = "image" id = "image" accept=".jpg, .jpeg, .png" value=""> <br> -->
+        
+        <div class="mb-3">
+            <label for="exampleInputName" class="form-label">Name</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputProductkey" class="form-label">Product Key:</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputActual" class="form-label">Actual Price</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputDiscounted" class="form-label">Discounted Price:</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Default file input example</label>
+            <input class="form-control" type="file" id="formFile">
+        </div>
+        <button type = "submit" class = "btn btn-primary" name = "submit">Submit</button> 
+        <br>
+        </form>
+        <br>
+        <a href="productpageLuga.php">Data</a>
     </div>
     </div>
 </body>

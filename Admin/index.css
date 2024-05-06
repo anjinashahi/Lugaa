@@ -9,6 +9,9 @@ html{
 body{
     height: 100%;
 }
+ol, ul{
+    padding:0px;
+}
 .main-container{
     display: flex;
     width: 100%;
@@ -23,7 +26,7 @@ body{
     width: 20%;
     height: 100%;
     min-height: 100vh;
-    background-color: black;
+    background-color: #0056b3 ;
     align-items: center;
     justify-content: center;
     color: white;
@@ -43,6 +46,13 @@ body{
     font-size: 20px;
     position: relative;
 }
+.admin-name{
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+    position: relative;
+}
 .left nav ul li a::after{
     content:"";
     width: 0;
@@ -54,12 +64,8 @@ body{
     transition: 0.5s;
 }
 .right{
-    /* width: 80%;
-    background-color:#EEE3CB ; */
     display: flex;
     flex-direction: row;
-    display: flex;
-    flex-direction: column;
     height: 100%;
     overflow: hidden;
     position: relative;
@@ -81,22 +87,25 @@ body{
 #pendingOrdersmain-container {
     margin-top: 70px; /* Adjust the margin-top as needed */
 }
-
+/* 
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
     padding: 5px;
-}
+} */
 
 /* CSS for the delivered orders */
 .delivered {
     background-color: lightgreen;
 }
-h1 {
-    font-size: 24px !important; /* Adjust the font size */
-    font-weight: bold; /* Make the text bold */
-    color: #333; /* Set the text color */
-    margin-bottom: 20px; /* Add some space below the heading */
-  }
+h1{
+    font-size: 30px;
+}
+#productChart{
+    margin: 10px;
+}
+.table{
+    margin: 15px;
+}
   
 

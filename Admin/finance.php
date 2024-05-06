@@ -56,51 +56,85 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Sales Chart</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel = "stylesheet " href="./finance.css">
     <!-- Include Chart.js library -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <canvas id="salesChart" width="400" height="200"></canvas>
-    <script>
-        // Data for chart
-        var chartData = <?php echo json_encode($chartData); ?>;
-        var productIds = Object.keys(chartData);
-        var totals = Object.values(chartData);
+    <div class = "main-container">
+        <div class = "left">
+            <nav>
+                <ul class="">
+                <li class="admin-login">
+                    <div class="admin-info">
+                        <div class="admin-photo">
+                        <!-- <img src="admin.webp" alt="Admin Photo"> -->
+                        </div>
+                        <div class="admin-name">Hello, Admin</div>
+                </div>
+                </li>
+                    <li> <a href = "http://localhost/Lugaa/admin">Analytics</a></li>
+                    <li> <a href = "http://localhost/Lugaa/admin/seller.php">Seller</a></li>
+                    <li> <a href = "http://localhost/Lugaa/admin/product.php">Product</a></li>
+                    <li> <a href = "finance.php">Finance</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class = "right">
+            <canvas id="salesChart" width="400" height="300"></canvas>
+            <script>
+                // Data for chart
+                var chartData = <?php echo json_encode($chartData); ?>;
+                var productIds = Object.keys(chartData);
+                var totals = Object.values(chartData);
 
-        // Create a bar chart
-        var ctx = document.getElementById('salesChart').getContext('2d');
-        var salesChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: productIds,
-                datasets: [{
-                    label: 'Total Sales',
-                    data: totals,
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
+                // Create a bar chart
+                var ctx = document.getElementById('salesChart').getContext('2d');
+                var salesChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: productIds,
+                        datasets: [{
+                            label: 'Total Sales',
+                            data: totals,
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
                         }
-                    }]
-                }
-            }
-        });
-    </script>
+                    }
+                });
+            </script>
 
-    <!-- Form to update seller's salary -->
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-        <label for="username">Seller Username:</label>
-        <input type="text" name="username" id="username" required>
-        <label for="new_salary">Salary:</label>
-        <input type="number" name="new_salary" id="new_salary" required>
-        <button type="submit">Update Salary</button>
-    </form>
+            <!-- Form to update seller's salary -->
+            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                <!-- <label for="username">Seller Username:</label>
+                <input type="text" name="username" id="username" required>
+                <label for="new_salary">Salary:</label>
+                <input type="number" name="new_salary" id="new_salary" required>
+                <button type="submit">Update Salary</button>
+            </form>
+            <form> -->
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Seller Username</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Salary</label>
+                <input type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

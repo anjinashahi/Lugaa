@@ -15,7 +15,8 @@
             border: 1px solid #ccc;
             padding: 10px;
             margin-bottom: 10px;
-            width: 200px; /* Adjust width as needed */
+            width: 250px;
+            0px; /* Adjust width as needed */
             display: inline-block;
             margin-right: 10px;
         }
@@ -27,13 +28,7 @@
             margin-bottom: 10px;
         }
         .seller-card p {
-            margin: 5px 0;
-        }
-        #addBtn, #deleteBtn {
-            /* float: right; */
-            margin-left: 10px;
-
-
+            margin: 10px 0;
         }
         /* CSS for modal */
         .modal {
@@ -75,24 +70,30 @@
         <div class = "left">
             <nav>
                 <ul class="">
+                <li class="admin-login">
+                    <div class="admin-info">
+                        <div class="admin-photo">
+                        <!-- <img src="admin.webp" alt="Admin Photo"> -->
+                        </div>
+                        <div class="admin-name">Hello, Admin</div>
+                    </div>
                     <li> <a href = "http://localhost/Lugaa/admin">Analytics</a></li>
                     <li> <a href = "http://localhost/Lugaa/admin/seller.php">Seller</a></li>
-                    <li> <a href = "">Categories</a></li>
-                    <li> <a href = "http://localhost/Lugaa/admin/lugaNewarrivalUpload.php">Product</a></li>
+                    <li> <a href = "http://localhost/Lugaa/admin/product.php">Product</a></li>
                     <li> <a href = "finance.php">Finance</a></li>
                 </ul>
             </nav>
         </div>
         <div class="right">
-            <div class ="button-nav ">
+            <div class ="button-nav">
                 <!-- <button id="addBtn">Add Seller</button>
                 <button id="deleteBtn">Delete Seller</button> -->
-                <button type="button" class="btn btn-primary btn-sm">Small button</button>
-<button type="button" class="btn btn-secondary btn-sm">Small button</button>
-        </div>
-            <div id="sellerCards">
-                <?php
-                // Include database connection
+                <button type="button" id = "addBtn" class="btn btn-primary btn-sm">Add Seller</button>
+                <button type="button" class="btn btn-secondary btn-sm">Delete Seller</button>
+            </div>
+        <div id="sellerCards">
+            <?php
+            // Include database connection
             $servername = "localhost";
             $username = "root";
             $password = "";

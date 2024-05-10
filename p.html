@@ -7,8 +7,7 @@
   <link rel="stylesheet" href="css/p.css">
   <script src="js/p.js" defer></script>
 </head>
-<body>
-
+<body> 
   <!-- Header Section -->
   <div class="header">
     <div class="header">
@@ -62,7 +61,25 @@
           <input type="number" value="1">
           <button class="increase">+</button>
         </div>
-        
+        <div class="quantity">
+    <button onclick="toggleSize(\'M\')">M</button>
+    <button onclick="toggleSize(\'L\')">L</button>
+    <button onclick="toggleSize(\'XL\')">XL</button>
+</div>
+
+        <h2>Select Size</h2> 
+        <div id="selectedSize" style="display: none;"></div>
+        <div class="sizes" style="display: none;"> <!-- Hide the sizes class initially -->
+          <span class="size M">M</span>
+          <span class="size L">L</span>
+          <span class="size XL">XL</span>
+        </div>
+        <div class="quantity">
+          <button class="decrease">-</button>
+          <input type="number" value="1" id="quantityInput"> <!-- Set default value to 1 -->
+          <button class="increase">+</button>
+          <div id="selectedQuantity" style="display: none;">1</div> <!-- Hide the selected quantity initially -->
+        </div>
         <button class="buy">Buy Now</button>
         <button class="add-to-cart">Add to Cart</button>
       </div>

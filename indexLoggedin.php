@@ -28,15 +28,15 @@ require 'connection.php';
             </div>
             <div class="nav-bar">
                 <div class="nav">
-                    <span>
-                        Home
-                    </span>
-                    <span>
+                <a href="indexLoggedin.php"><span>
+                     Home
+                    </span></a>
+                    <a href="product_page.php"><span>
                         Products
-                    </span>
-                    <span>
+                    </span></a>
+                    <a href="contactus.html"><span>
                         Contact Us
-                    </span>
+                    </span></a>
                 </div>
                 <div class="line-1"></div>
             </div>
@@ -45,7 +45,8 @@ require 'connection.php';
                     <ion-icon name="search"></ion-icon>
                 </div>
                 <div class="cart-group">
-                    <ion-icon name="cart-outline"></ion-icon>
+                    <a href="cart.php"><ion-icon name="cart-outline"></ion-icon></a>
+                    
                 </div>
                 <div class="usericon">
                     <a href="profileEditable.php">
@@ -108,18 +109,18 @@ require 'connection.php';
     $result = mysqli_query($conn, "SELECT * FROM discounted_product ORDER BY product_id DESC");
     while ($row = mysqli_fetch_assoc($result)) :
         $_SESSION['product_id1'] = $row['product_id'];
-         echo 'id = ' . $_SESSION['product_id1'];
+         //echo 'id = ' . $_SESSION['product_id1'];
         $_SESSION['product_price1'] = $row['discounted_price'];
-        echo 'product price = '. $_SESSION['product_price1'] 
+        //echo 'product price = '. $_SESSION['product_price1'] 
 ?>
     <div class="product">
         <img src="img/<?php echo $row['image']; ?>" alt="">
         <div class="details">
             <h3><?php echo $row["product_name"]; ?></h3>
-            <p class="orginal-price"><?php echo $row["actual_price"]; ?></p>
+            <p class="original-price"><?php echo $row["actual_price"]; ?></p>
             <p class="discounted-price"><?php echo $row["discounted_price"]; ?></p>
             <!-- Form to send product ID to test2.php -->
-            <form action="test.php" method="post">
+            <form action="product_details_discount.php" method="post">
                 <input type="hidden" name="product_id1" value="<?php echo $_SESSION['product_id1']; ?>">
                 
                 <button type="submit" class="buy-button">Buy Now</button>
@@ -142,9 +143,7 @@ require 'connection.php';
                         <?php
     error_reporting(E_ALL & ~E_NOTICE); // Suppress notices
     
-    //@session_start(); // Start the session (suppressing the notice)
-    
-    // Your code goes here...
+   
     
     $result = mysqli_query($conn, "SELECT * FROM product ORDER BY product_id DESC");
     while ($row = mysqli_fetch_assoc($result)) :
@@ -158,7 +157,7 @@ require 'connection.php';
             <p><?php echo $row["price"]; ?></p>
             
             <!-- Form to send product ID to test2.php -->
-            <form action="test2.php" method="post">
+            <form action="product_details_product.php" method="post">
                 <input type="hidden" name="product_id2" value="<?php echo $_SESSION['product_id2']; ?>">
                 
                 <button type="submit" class="buy-button">Buy Now</button>

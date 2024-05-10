@@ -1,0 +1,65 @@
+/* Center the content horizontally and vertically */
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Style for the quantity section */
+.quantity {
+    margin-bottom: 20px; /* Add some spacing between sections */
+}
+
+.quantity button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+/* Style for the update button */
+.quantity button.decrease,
+.quantity button.increase {
+    width: 30px; /* Adjust the width of the buttons */
+}
+
+/* Style for the info section */
+.info {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: inline-block; /* Ensure the section stays inline */
+}
+
+.info p {
+    margin: 5px 0; /* Adjust the margin for paragraphs */
+}
+
+.info p:first-child {
+    margin-top: 0; /* Remove top margin for the first paragraph */
+}
+
+/* Style for the "Go to cart" button */
+#cart-button {
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: block; /* Change display to block for full-width button */
+    font-size: 16px;
+    margin-top: 20px; /* Add some spacing below the info section */
+    cursor: pointer;
+    border-radius: 4px;
+    width: 100%; /* Make the button full-width */
+}

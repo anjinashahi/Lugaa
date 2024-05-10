@@ -235,6 +235,14 @@ if(isset($_POST['submit'])){
     </div>
   </div>
 
+<!-- QR Code Section -->
+<div class="qr-code">
+    <h2>QR Code</h2>
+    <div class="qr_code">
+    <img src="images/qrcode.png" alt="QR Code">
+</div>
+</div>
+
   <!-- Footer Section -->
   <footer>
     <div class="footer">
@@ -308,6 +316,3 @@ if(isset($_POST['submit'])){
 </body>
 
 </html>
-
-
-

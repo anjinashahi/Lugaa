@@ -10,7 +10,9 @@ $color = isset($_POST['color']) ? htmlspecialchars($_POST['color']) : '';
 $product_image = isset($_POST['product_image']) ? htmlspecialchars($_POST['product_image']) : '';
 $product_name = isset($_POST['product_name']) ? htmlspecialchars($_POST['product_name']) : '';
 $discounted_price = isset($_POST['discounted_price']) ? htmlspecialchars($_POST['discounted_price']) : '';
+$single_price = $discounted_price;
 $order_status = 'pending'; // Set order status to pending
+
 
 // to display info 
 echo "Size: " . $size . "<br>";
@@ -64,14 +66,14 @@ if(isset($_SESSION['logged'])) {
 
 $size = strtolower($size);
 // Prepare INSERT query
-$sql_order = "INSERT INTO order_details (customer_id, size, color, total, quantity, product_id, order_status, address, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$sql_order = "INSERT INTO order_details (customer_id, size, color, total, quantity, product_id, order_status, address, phone, singlePrice, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 // Calculate total
 $total = strval(floatval($quantity) * floatval($discounted_price));
 
 // Prepare and bind parameters
 $stmt = $conn->prepare($sql_order);
-$stmt->bind_param("sssssssss", $customer_id, $size, $color, $total, $quantity, $product_ids, $order_status, $address, $phone);
+$stmt->bind_param("sssssssssss", $customer_id, $size, $color, $total, $quantity, $product_ids, $order_status, $address, $phone, $single_price, $product_image);
 
 // Execute the query
 if ($stmt->execute()) {

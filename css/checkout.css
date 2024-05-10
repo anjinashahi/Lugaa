@@ -443,3 +443,9 @@ textarea {
   width: fit-content;
   box-sizing: border-box;
 }
+.qr-code{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

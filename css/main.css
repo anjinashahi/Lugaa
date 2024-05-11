@@ -103,52 +103,6 @@
     display: flex;
     align-items: center;
 }
-/* .search-container {
- justify-items: center;
-    
-}
-
-.search-input {
-    padding-left: 30px; 
-}
-
-.search-icon {
-    position: absolute;
-    left: 10px; 
-    top: 50%;
-    transform: translateY(-50%);
-    color: #888; 
-}
-
-
-
-.search-outline {
-    margin-right: 5px;
-    color: #888; /* Adjust icon color */
-} */
-/* 
-.search-input {
-    border: none;
-    background: none;
-    padding: 5px;
-    font-size: 16px;
-} */
-
-.cart-group,
-.usericon {
-    margin-left: 10px; /* Adjust spacing between icons */
-}
-
-/* Optional: Hover effects */
-.search-container:hover {
-    background-color: #e0e0e0; /* Adjust hover background color */
-    transition: background-color 0.3s ease;
-}
-
-/* .topright {
-    display: flex;
-    align-items: center;
-} */
 
 .search,
 .cart-group,
@@ -163,7 +117,7 @@
     cursor: pointer;
 }
 
-.main-container {
+.container {
     margin-bottom: 9px;
     display: flex;
     flex-direction: row;
@@ -247,7 +201,7 @@
     font-weight: 500;
 }
 
-.product-main-container {
+.product-container {
     display: flex;
     justify-content: space-around;
 }
@@ -530,7 +484,7 @@
     color: #000000;
 }
 
-.main-container-6 {
+.container-6 {
 
     display: flex;
     flex-direction: row;
@@ -540,7 +494,7 @@
     box-sizing: border-box;
 }
 
-.main-container-7 {
+.container-7 {
     margin-bottom: 10px;
     display: flex;
     flex-direction: row;
@@ -548,7 +502,7 @@
     box-sizing: border-box;
 }
 
-.main-container-9 {
+.container-9 {
     margin-right: 6.9px;
     display: flex;
     flex-direction: row;
@@ -556,7 +510,7 @@
     box-sizing: border-box;
 }
 
-.main-container-10 {
+.container-10 {
     display: flex;
     flex-direction: row;
     width: fit-content;
@@ -564,7 +518,7 @@
     justify-content: space-between;
 }
 
-.main-container-11 {
+.container-11 {
     margin-right: 1.4px;
     display: flex;
     flex-direction: row;
@@ -574,7 +528,7 @@
 
 /* Reveiw and rating section  */
 
-.review-main-container {
+.review-container {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -669,7 +623,7 @@ body {
     padding: 0;
 }
 
-.review-form-main-container {
+.review-form-container {
     max-width: 600px;
     margin: 50px auto;
     padding: 20px;

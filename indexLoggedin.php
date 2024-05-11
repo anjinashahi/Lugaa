@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php 
+require 'connection.php';
+
+
+?>
+
 
 <head>
     <meta charset="UTF-8">
@@ -12,21 +18,25 @@
 <body>
     <div class="home-page">
         <!-- Header Section -->
+
+
+        <!-- php code for products  -->
+        
         <div class="header">
             <div class="logo">
                 <a href="index.html"><img src="images/logo221.png" alt="Logo"></a>
             </div>
             <div class="nav-bar">
                 <div class="nav">
-                    <span>
-                        <a href="index.html">Home</a>
-                    </span>
-                    <span>
-                       <a href="product.html">Products</a>
-                    </span>
-                    <span>
-                        <a href="contactus.html">Contact Us</a>
-                    </span>
+                <a href="indexLoggedin.php"><span>
+                     Home
+                    </span></a>
+                    <a href="product_page.php"><span>
+                        Products
+                    </span></a>
+                    <a href="contactus.html"><span>
+                        Contact Us
+                    </span></a>
                 </div>
                 <div class="line-1"></div>
             </div>
@@ -39,12 +49,21 @@
                 </div>
                 
                 <div class="cart-group">
-                    <ion-icon name="cart-outline"></ion-icon>
+                    <a href="cart.php"><ion-icon name="cart-outline"></ion-icon></a>
+                    
                 </div>
                 <div class="usericon">
-                    <a href="login.html">
+                    <a href="profileEditable.php">
                         <ion-icon name="person-circle-outline"></ion-icon>
+                        <div id = "name"><?php
+                        session_start();
+                        if(isset($_SESSION['logged'])){
+                            $loggedInName = $_SESSION['logged'];
+                            echo"User: " . $loggedInName;
+                        }?>
+                        </div>
                     </a>
+                    
                 </div>
             </div>
             
@@ -56,7 +75,6 @@
             </div>
 
             <!-- carousel -->
-
             <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                   <div class="carousel-item active" data-bs-interval="10000">
@@ -78,49 +96,86 @@
                   <span class="visually-hidden">Next</span>
                 </button>
               </div>
+
+
+
+
             <!-- Discounted Section  -->
-            <div class="discounted-section">
+            <div class="discounted-section"> 
                 <h2>Discounted Products</h2>
-                <div class="product">
-                    <img src="images/i1.jpeg" alt="Product 1">
-                    <div class="details">
-                        <h3>SweatShirt</h3>
-                        <p class="original-price">Rs.2000.00</p>
-                        <p class="discounted-price">Rs. 1750.00</p>
-                        <button class="buy-button">Buy Now</button>
-                    </div>
-                </div>
-                <div class="product">
-                    <img src="images/i4.jpeg" alt="Product 2">
-                    <div class="details">
-                        <h3>Hoodie</h3>
-                        <p class="original-price">Rs.2500.00</p>
-                        <p class="discounted-price">Rs.1450.00</p>
-                        <button class="buy-button">Buy Now</button>
-                    </div>
-                </div>
-                <div class="product">
-                    <img src="images/i3.jpeg" alt="Product 3">
-                    <div class="details">
-                        <h3>Hoodie</h3>
-                        <p class="original-price">Rs.2500.00</p>
-                        <p class="discounted-price">Rs.1450.00</p>
-                        <button class="buy-button">Buy Now</button>
-                    </div>
+                <section class="discount_container">
+                <?php
+    error_reporting(E_ALL & ~E_NOTICE); // Suppress notices
+    
+    @session_start(); // Start the session (suppressing the notice)
+    
+    // Your code goes here...
+    
+    $result = mysqli_query($conn, "SELECT * FROM discounted_product ORDER BY product_id DESC");
+    while ($row = mysqli_fetch_assoc($result)) :
+        $_SESSION['product_id1'] = $row['product_id'];
+         //echo 'id = ' . $_SESSION['product_id1'];
+        $_SESSION['product_price1'] = $row['discounted_price'];
+        //echo 'product price = '. $_SESSION['product_price1'] 
+?>
+    <div class="product">
+        <img src="img/<?php echo $row['image']; ?>" alt="">
+        <div class="details">
+            <h3><?php echo $row["product_name"]; ?></h3>
+            <p class="original-price"><?php echo $row["actual_price"]; ?></p>
+            <p class="discounted-price"><?php echo $row["discounted_price"]; ?></p>
+            <!-- Form to send product ID to test2.php -->
+            <form action="product_details_discount.php" method="post">
+                <input type="hidden" name="product_id1" value="<?php echo $_SESSION['product_id1']; ?>">
+                
+                <button type="submit" class="buy-button">Buy Now</button>
+            </form>
+            
+        </div>
+    </div>
+            
+
+    <?php error_reporting(E_ALL); // Restore error reporting level ?>
+    <?php endwhile; ?>
+                </section>
+                
                 </div>
                 <!-- Latest Section -->
                 <div class="lastest">
                     <h2>New Arrivals</h2>
-                    <div class="product-main-container">
-                        <div class="p">
-                            <img src="images/image1.jpeg" alt="SweatShirt (Brown)">
-                            <div class="product-info">
-                                <p>SweatShirt (Brown)</p>
-                                <p>Rs 2,000.00</p>
-                                <button class="buy-button">Buy Now</button>
-                            </div>
-                        </div>
-                        <div class="p">
+                    <section class="newarrival_container"> 
+                        <!-- phpcode -->
+                        <?php
+    error_reporting(E_ALL & ~E_NOTICE); // Suppress notices
+    
+   
+    
+    $result = mysqli_query($conn, "SELECT * FROM product ORDER BY product_id DESC");
+    while ($row = mysqli_fetch_assoc($result)) :
+        $_SESSION['product_id2'] = $row['product_id'];
+        // echo 'id = ' . $_SESSION['product_id2']; 
+?>
+    <div class="product">
+        <img src="img/<?php echo $row['image']; ?>" alt="">
+        <div class="details">
+            <h3><?php echo $row["product_name"]; ?></h3>
+            <p><?php echo $row["price"]; ?></p>
+            
+            <!-- Form to send product ID to test2.php -->
+            <form action="product_details_product.php" method="post">
+                <input type="hidden" name="product_id2" value="<?php echo $_SESSION['product_id2']; ?>">
+                
+                <button type="submit" class="buy-button">Buy Now</button>
+            </form>
+        </div>
+    </div>
+<?php endwhile; ?>
+
+<?php error_reporting(E_ALL); // Restore error reporting level ?>
+
+
+                </section>
+                        <!-- <div class="p">
                             <img src="images/image2.jpeg" alt="Hoodie (Black)">
                             <div class="product-info">
                                 <p>Hoodie (Black)</p>
@@ -135,7 +190,7 @@
                                 <p>Rs 2,000.00</p>
                                 <button class="buy-button">Buy Now</button>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 
@@ -251,7 +306,7 @@
                             <img src="images/email1.png" alt="mail">
                         </div>
                         <div class="lugaagmail-com">
-                            lugaaclothing@gmail.com
+                            lugaa@gmail.com
                         </div>
                     </div>
                 </div>
@@ -285,11 +340,13 @@
 <!-- Icon Links -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
+    
 <!-- Bootstrap Links -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 
+    <!-- ending code for php -->
+    
 </body>
 
 </html>

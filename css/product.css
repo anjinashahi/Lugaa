@@ -93,7 +93,7 @@ body {
   }
   
 
-  .main-container {
+  .container {
     
     margin: 20px auto;
     padding: 0 20px;
@@ -265,13 +265,13 @@ body{
    background: #eee;
 }
 
-/* .main-container{
+/* .container{
    max-width: 1200px;
    margin:0 auto;
    padding:3rem 2rem;
 } */
 
-/* .main-container .title{
+/* .container .title{
    font-size: 3.5rem;
    color:#444;
    margin-bottom: 3rem;
@@ -279,13 +279,13 @@ body{
    text-align: center;
 }
 
-.main-container .products-main-container{
+.container .products-container{
    display: grid;
    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
    gap:2rem;
 }
 
-.main-container .products-main-container .product{
+.container .products-container .product{
    text-align: center;
    padding:3rem 2rem;
    background: #fff;
@@ -295,30 +295,30 @@ body{
    cursor: pointer;
 }
 
-.main-container .products-main-container .product:hover{
+.container .products-container .product:hover{
    outline: .2rem solid #222;
    outline-offset: 0;
 }
 
-.main-container .products-main-container .product img{
+.container .products-container .product img{
    height: 25rem;
 }
 
-.main-container .products-main-container .product:hover img{
+.container .products-container .product:hover img{
    transform: scale(.9);
 }
 
-.main-container .products-main-container .product h3{
+.container .products-container .product h3{
    padding:.5rem 0;
    font-size: 2rem;
    color:#444;
 }
 
-.main-container .products-main-container .product:hover h3{
+.container .products-container .product:hover h3{
    color:#27ae60;
 }
 
-.main-container .products-main-container .product .price{
+.container .products-container .product .price{
    font-size: 2rem;
    color:#444;
 } */
@@ -629,7 +629,7 @@ body{
   color: #000000;
 }
 
-.main-container-6 {
+.container-6 {
 
   display: flex;
   flex-direction: row;
@@ -639,7 +639,7 @@ body{
   box-sizing: border-box;
 }
 
-.main-container-7 {
+.container-7 {
   margin-bottom: 10px;
   display: flex;
   flex-direction: row;
@@ -647,7 +647,7 @@ body{
   box-sizing: border-box;
 }
 
-.main-container-9 {
+.container-9 {
   margin-right: 6.9px;
   display: flex;
   flex-direction: row;
@@ -655,7 +655,7 @@ body{
   box-sizing: border-box;
 }
 
-.main-container-10 {
+.container-10 {
   display: flex;
   flex-direction: row;
   width: fit-content;
@@ -663,7 +663,7 @@ body{
   justify-content: space-between;
 }
 
-.main-container-11 {
+.container-11 {
   margin-right: 1.4px;
   display: flex;
   flex-direction: row;

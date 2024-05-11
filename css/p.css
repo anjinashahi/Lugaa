@@ -117,7 +117,8 @@
   }
   
   .product-image {
-    width: 40%;
+    width: 300px;
+    height: 120px;
   }
   
   .product-image img {
@@ -126,20 +127,20 @@
   }
   
   .product-info {
-    width: 55%;
-    margin-bottom: 20px;
+    width: 97%;
+    margin-bottom: -20px;
   }
   
   .product-info h2 {
-    margin-top: 0;
+    margin-top: 150px;
   }
   .description{
    /* max-width: 100px; */
   }
   .price {
     font-size: 1.5rem;
-    margin-top: 100px;
-    margin-bottom: 20px;
+    margin-top: 9px;
+    margin-bottom: 25px;
   }
   
   .quantity {
@@ -155,6 +156,26 @@
   }
   
   .quantity input {
+    font-size: 1rem;
+    padding: 5px 10px;
+    width: 50px;
+    text-align: center;
+    border: 1px solid #ccc;
+  }
+
+  .sizes {
+    margin-bottom: 20px;
+  }
+  
+  .sizes button {
+    font-size: 1.5rem;
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .sizes input {
     font-size: 1rem;
     padding: 5px 10px;
     width: 50px;

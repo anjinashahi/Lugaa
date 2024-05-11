@@ -1,0 +1,102 @@
+/* Style for the cart list */
+.product-details {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 80%;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+}
+
+.product-details p {
+    margin: 5px 0;
+}
+
+.order-id {
+    font-weight: bold;
+}
+
+/* Style for the buttons */
+button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Style for form fields */
+input[type=hidden] {
+    display: none;
+}
+
+/* Quantity input style */
+.quantity {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.quantity .decrease,
+.quantity .increase {
+    background-color: #ccc;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px 10px;
+}
+
+.quantity .selected-quantity {
+    display: none;
+    margin-left: 10px;
+    font-size: 16px;
+}
+.product-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    width: 400px; /* Adjust width as needed */
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+}
+
+.product-details p {
+    flex: 1 1 100%;
+    margin: 5px 0;
+}
+
+.product-details form {
+    display: flex;
+    flex: 1 1 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-details form button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.product-details form button:hover {
+    background-color: #45a049;
+}

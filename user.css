@@ -117,32 +117,3 @@ ul li {
     z-index: 9999;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.container {
-    width: 80%;
-    margin: 0 auto;
-}
-
-.row {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.col {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    margin: 10px;
-}
-
-.col h4 {
-    margin-bottom: 10px;
-}
-
-.col p {
-    margin: 5px 0;
-}
-
-.col p strong {
-    margin-right: 5px;
-    font-weight: bold;
-}

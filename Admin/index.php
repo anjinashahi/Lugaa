@@ -114,9 +114,9 @@ $conn->close();
                         </div>
                         <div class="admin-name">Hello, Admin</div>
                     </div>
-                    <li> <a href = "http://localhost/Lugaa/admin/analytics.php">Analytics</a></li>
-                    <li> <a href = "http://localhost/Lugaa/admin/seller.php">Seller</a></li>
-                    <li> <a href = "http://localhost/Lugaa/admin/product.php">Product</a></li>
+                    <li> <a href = "analytics.php">Analytics</a></li>
+                    <li> <a href = "seller.php">Seller</a></li>
+                    <li> <a href = "product.php">Product</a></li>
                     <li> <a href = "finance.php">Finance</a></li>
                 </ul>
             </nav>

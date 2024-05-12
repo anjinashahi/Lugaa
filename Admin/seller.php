@@ -12,14 +12,14 @@
             /* margin: 20px; */
         }
         .seller-card {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 10px;
-            width: 250px;
-            0px; /* Adjust width as needed */
-            display: inline-block;
-            margin-right: 10px;
-        }
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 250px; /* Adjust width as needed */
+    display: inline-block;
+    margin-right: 10px;
+}
+
         .seller-card img {
             max-width: 100px;
             max-height: 100px;
@@ -77,9 +77,9 @@
                         </div>
                         <div class="admin-name">Hello, Admin</div>
                     </div>
-                    <li> <a href = "http://localhost/Lugaa/admin">Analytics</a></li>
-                    <li> <a href = "http://localhost/Lugaa/admin/seller.php">Seller</a></li>
-                    <li> <a href = "http://localhost/Lugaa/admin/product.php">Product</a></li>
+                    <li> <a href = "admin">Analytics</a></li>
+                    <li> <a href = "seller.php">Seller</a></li>
+                    <li> <a href = "product.php">Product</a></li>
                     <li> <a href = "finance.php">Finance</a></li>
                 </ul>
             </nav>

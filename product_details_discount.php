@@ -115,7 +115,7 @@ else {
     echo "<div class='product-info'>Product ID is not set in the session.</div>";
 }
 
-echo '
+echo '<div class = "buying_section">
 <div class="quantity">
     <button onclick="toggleSize(\'M\')">M</button>
     <button onclick="toggleSize(\'L\')">L</button>
@@ -139,7 +139,7 @@ Please Select Size
 <button class="buy" onclick="redirectToCheckout()">Buy Now</button>
 <button class="add-to-cart" onclick="addToCart()">Add to Cart</button> <!-- Modified button with onclick event -->
 
-';
+</div>';
 ?>
 
 <script>

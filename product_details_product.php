@@ -125,7 +125,7 @@ if(isset($_POST['product_id2'])) {
         
         
         ;
-        echo"<script>console.log('Product ID:', product_id); </script>";
+       
       }
      
       

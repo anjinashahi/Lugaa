@@ -24,7 +24,7 @@ require 'connection.php';
         
         <div class="header">
             <div class="logo">
-                <a href="index.html"><img src="images/logo221.png" alt="Logo"></a>
+                <img src="images/logo221.png" alt="Logo">
             </div>
             <div class="nav-bar">
                 <div class="nav">
@@ -41,13 +41,9 @@ require 'connection.php';
                 <div class="line-1"></div>
             </div>
             <div class="topright">
-                <div class="search-container">
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <ion-icon class="btn btn-outline-success" type="submit" name="search-outline"></ion-icon>
-                      </form>
+                <div class="search">
+                    <ion-icon name="search"></ion-icon>
                 </div>
-                
                 <div class="cart-group">
                     <a href="cart.php"><ion-icon name="cart-outline"></ion-icon></a>
                     
@@ -66,7 +62,6 @@ require 'connection.php';
                     
                 </div>
             </div>
-            
         </div>
         <section class="main-section">
             <!-- Catchphrase Section -->
@@ -200,7 +195,8 @@ require 'connection.php';
                         <h2>About Us</h2>
                         <p>
                             &#34;Luga: Your ultimate online shopping destination. Explore curated collections across
-                            fashion.Our sleek design and intuitive features ensure a seamless
+                            fashion,
+                            electronics, home goods, and more. Our sleek design and intuitive features ensure a seamless
                             browsing experience. Discover convenience, style, and satisfaction with Luga.&#34;
                         </p>
                     </div>
@@ -209,7 +205,7 @@ require 'connection.php';
                     </div>
                 </div>
                 <!-- Review Section -->
-                <!-- <div class="review-form-container">
+                <div class="review-form-container">
                     <h2>Leave a Review</h2>
                     <form id="review-form">
                         <div class="form-group">
@@ -232,7 +228,7 @@ require 'connection.php';
                         </div>
                         <button type="submit">Submit Review</button>
                     </form>
-                </div> -->
+                </div>
                 <div class="review-container">
                     <div class="review-card">
                         <img src="images/user-1.png" alt="John Doe Profile Picture">
@@ -272,7 +268,7 @@ require 'connection.php';
         <div class="footer">
             <div class="line-2">
             </div>
-            <div class="main-container-6">
+            <div class="container-6">
                 <div class="footerlogo">
                     <div class="logo-1">
                         <img src="images/logo221.png" alt="flogo">
@@ -285,7 +281,7 @@ require 'connection.php';
                     <div class="contact-us-3">
                         Contact Us
                     </div>
-                    <div class="main-container-7">
+                    <div class="container-7">
                         <div class="pin-1">
                             <img src="images/pin1.png" alt="location">
                         </div>
@@ -293,7 +289,7 @@ require 'connection.php';
                             Kathmandu, Nepal
                         </div>
                     </div>
-                    <div class="main-container">
+                    <div class="container">
                         <div class="phone-call-1">
                             <img src="images/phoneCall1.png" alt="phone">
                         </div>
@@ -301,7 +297,7 @@ require 'connection.php';
                             9876543210
                         </div>
                     </div>
-                    <div class="main-container-11">
+                    <div class="container-11">
                         <div class="email-1">
                             <img src="images/email1.png" alt="mail">
                         </div>
@@ -314,7 +310,7 @@ require 'connection.php';
                     <div class="stay-connected">
                         Stay Connected
                     </div>
-                    <div class="main-container-9">
+                    <div class="container-9">
                         <div class="instagram-1">
                             <img src="images/instagram1.png" alt="instagram">
 
@@ -326,7 +322,7 @@ require 'connection.php';
                     </div>
                 </div>
             </div>
-            <div class="main-container-10">
+            <div class="container-10">
                 <div class="copyright-1">
                     <img src="images/copyright1.png" alt="copyright">
                 </div>

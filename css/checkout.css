@@ -449,3 +449,15 @@ textarea {
   align-items: center;
   justify-content: center;
 }
+.product-info {
+  margin: 0; /* Reset margin */
+}
+
+#product_info {
+  margin-right: 20px;
+
+  /* Apply styles specific to the product info with ID 'product_info' if needed */
+}
+.os{
+  margin-left: 50px;
+}

@@ -12,7 +12,7 @@ textarea {
   font-family: "Poppins", sans-serif;
 }
 
-.main-container {
+.container {
   position: relative;
   width: 100%;
   min-height: 100vh;
@@ -107,7 +107,7 @@ form {
   margin-bottom: 0.7rem;
 }
 
-.input-main-container {
+.input-container {
   position: relative;
   margin: 1rem 0;
 }
@@ -134,7 +134,7 @@ textarea.input {
   overflow-y: auto;
 }
 
-.input-main-container label {
+.input-container label {
   position: absolute;
   top: 50%;
   left: 15px;
@@ -148,7 +148,7 @@ textarea.input {
   transition: 0.5s;
 }
 
-.input-main-container.textarea label {
+.input-container.textarea label {
   top: 1rem;
   transform: translateY(0);
 }
@@ -173,7 +173,7 @@ textarea.input {
   color: #fff;
 }
 
-.input-main-container span {
+.input-container span {
   position: absolute;
   top: 0;
   left: 25px;
@@ -185,8 +185,8 @@ textarea.input {
   z-index: 500;
 }
 
-.input-main-container span:before,
-.input-main-container span:after {
+.input-container span:before,
+.input-container span:after {
   content: "";
   position: absolute;
   width: 10%;
@@ -199,23 +199,23 @@ textarea.input {
   transform: translateY(-50%);
 }
 
-.input-main-container span:before {
+.input-container span:before {
   left: 50%;
 }
 
-.input-main-container span:after {
+.input-container span:after {
   right: 50%;
 }
 
-.input-main-container.focus label {
+.input-container.focus label {
   top: 0;
   transform: translateY(-50%);
   left: 25px;
   font-size: 0.8rem;
 }
 
-.input-main-container.focus span:before,
-.input-main-container.focus span:after {
+.input-container.focus span:before,
+.input-container.focus span:after {
   width: 50%;
   opacity: 1;
 }
@@ -362,7 +362,7 @@ textarea.input {
 }
 
 @media (max-width: 480px) {
-  .main-container {
+  .container {
     padding: 1.5rem;
   }
 

@@ -18,15 +18,15 @@
   <header>
     <div class="header">
       <div class="logo">
-          <a href="index.html"><img src="images/logo221.png" alt="Logo"></a>
+          <a href="indexLoggedin.php"><img src="images/logo221.png" alt="Logo"></a>
       </div>
       <div class="nav-bar">
           <div class="nav">
               <span>
-                  <a href="index.html">Home</a>
+                  <a href="indexLoggedin.php">Home</a>
               </span>
               <span>
-                 <a href="product.html">Products</a>
+                 <a href="product_page.php">Products</a>
               </span>
               <span>
                   <a href="contactus.html">Contact Us</a>
@@ -42,7 +42,7 @@
               <ion-icon name="cart-outline"></ion-icon>
           </div>
           <div class="usericon">
-              <a href="login.html">
+              <a href="profileEditable.php">
                   <ion-icon name="person-circle-outline"></ion-icon>
               </a>
           </div>
@@ -90,18 +90,18 @@ if(isset($_SESSION['logged'])) {
         <section class="customer-info">
           <h2>Customer Information</h2>
           <form>
-          
+          <p><strong>Customer ID:</strong> <?php echo $row['customer_id']; ?></p>
             <div>
-              <label for="fullname">Full Name: <strong><?php echo $row['full_name']; ?></p></label> </strong>
-              
+              <label for="fullname">Full Name:</label>
+              <p><strong>Name:</strong> <?php echo $row['full_name']; ?></p>
             </div>
             <div>
-              <label for="email">Email:<strong><p><?php echo $row['email']; ?></p></label></strong>
-              
+              <label for="email">Email:</label>
+              <p><strong>Phone:</strong> <?php echo $row['email']; ?></p>
             </div>
             <div>
-              <label for="phone">Phone Number:<strong><p><?php echo $row['phone_number']; ?></p></label></strong>
-              
+              <label for="phone">Phone Number:</label>
+              <p><strong>Phone:</strong> <?php echo $row['phone_number']; ?></p>
             </div>
           </form>
         </section>
@@ -121,8 +121,8 @@ if(isset($_SESSION['logged'])) {
           <h2>Delivery Information</h2>
           <form>
             <div>
-              <label for="city">Address: <strong><?php echo $row['address']; ?></label> </strong>
-              
+              <label for="city">Address:</label>
+              <?php echo $row['address']; ?>
             </div>
             
           
@@ -148,7 +148,7 @@ $product_name = isset($_GET['product_name']) ? htmlspecialchars($_GET['product_n
 $total = strval($quantity * floatval($discounted_price));
 $total2 = strval($quantity * floatval($price));
 
-
+echo"<script>console.log('Product ID:', product_id); </script>";
 
 // Retrieve customer information from the session
 $customer_id = isset($row['customer_id']) ? $row['customer_id'] : '';
@@ -164,20 +164,17 @@ $address = isset($row['address']) ? $row['address'] : '';
 
 echo "<div class='product'>
       <img src='img/$product_image'>
-      <p id='product_info'>Name: <span style='color: #2c9713'>$product_name</span></p>
-      <p id='product_info'>Size: <span style='color: #2c9713'> $size</span></p>
-      <p id='product_info'>Color: <span style='color: #2c9713'>$color</span></p>";
+      <p>Name: $product_name</p>
+      <p>Size: $size</p>
+      <p>Color: $color</p>
+      <p>Product Id: $product_ids</p>";
 
 if ($total == 0) {
-    echo "<p id='product_info'>Total:<span style='color: #2c9713'> \$$total2</span></p>";
+    echo "<p>Total: \$$total2</p>";
 } else {
-    echo "<p id='product_info'>Total: <span style='color: #2c9713'>\$$total</span></p>";
+    echo "<p>Total: \$$total</p>";
 }
-
-echo "<p id='product_info'><span style='display: none;'>$product_ids</span></p>";
-
 echo "</div>";
-
 
 //session_start(); // Start the session
 
@@ -237,14 +234,6 @@ if(isset($_POST['submit'])){
       </div>
     </div>
   </div>
-
-<!-- QR Code Section -->
-<div class="qr-code">
-    <h2>QR Code</h2>
-    <div class="qr_code">
-    <img src="images/qrcode.png" alt="QR Code">
-</div>
-</div>
 
   <!-- Footer Section -->
   <footer>
@@ -319,3 +308,6 @@ if(isset($_POST['submit'])){
 </body>
 
 </html>
+
+
+

@@ -1,102 +1,274 @@
-/* Style for the cart list */
-.product-details {
-    border: 1px solid #ccc;
-    margin-bottom: 20px;
-    padding: 10px;
-    width: 80%;
-    margin: 0 auto;
-    background-color: #f9f9f9;
+/* body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-.product-details p {
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.cart-box {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.product {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.product p {
     margin: 5px 0;
 }
 
-.order-id {
-    font-weight: bold;
-}
-
-/* Style for the buttons */
-button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #45a049;
-}
-
-/* Style for form fields */
-input[type=hidden] {
-    display: none;
-}
-
-/* Quantity input style */
 .quantity {
-    display: flex;
-    align-items: center;
     margin-top: 10px;
 }
 
-.quantity .decrease,
-.quantity .increase {
-    background-color: #ccc;
-    border: none;
-    color: #333;
-    cursor: pointer;
-    font-size: 16px;
+.quantity button {
     padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
 }
 
-.quantity .selected-quantity {
+.quantity input[type="number"] {
+    width: 50px;
+    text-align: center;
+}
+
+.quantity #selectedQuantity {
     display: none;
-    margin-left: 10px;
-    font-size: 16px;
-}
-.product-details {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 20px;
-    width: 400px; /* Adjust width as needed */
-    margin-bottom: 20px;
-    background-color: #f9f9f9;
+    font-weight: bold;
 }
 
-.product-details p {
-    flex: 1 1 100%;
+.update_quantity {
+    margin-top: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    background-color: #28a745;
+    color: #fff;
+}
+
+.purchased {
+    margin-top: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    background-color: #dc3545;
+    color: #fff;
+} */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+}
+   
+p{
+    margin-bottom: 0px;
+}
+.header {
+    background: #D9D9D9;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 100;
+}
+
+.main-section {
+    margin-top: 100px;
+}
+
+.logo {
+    border-radius: 25px;
+    width: 250px;
+    height: 100px;
+    overflow: hidden;
+    object-fit: cover;
+
+}
+
+.logo img {
+    height: 100%;
+    border-radius: 25px;
+}
+
+.catchphrase {
+    margin-top: 20px;
+    background: #FFFFFF;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.catchphrase p {
+    overflow-wrap: break-word;
+    font-family: 'Sans Serif Collection', 'Roboto Condensed';
+    font-weight: 400;
+    font-size: 50px;
+    color: #000000;
+}
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: fit-content;
+    box-sizing: border-box;
+    
+}
+
+.nav a{
+    text-decoration: none;
+    color: #000000;
+}
+.nav span {
+    font-family: 'Sans Serif Collection', 'Roboto Condensed';
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.nav span:hover {
+    transform: scale(1.1);
+}
+
+.nav-bar {
+    margin-bottom: 8px;
+    flex-direction: row;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.line-1 {
+    background: #000000;
+    align-self: center;
+    width: 325px;
+    height: 1px;
+
+}
+
+.topright {
+    display: flex;
+    align-items: center;
+}
+
+.search,
+.cart-group,
+.usericon {
+    margin-right: 20px;
+    font-size: 24px;
+}
+
+.search ion-icon,
+.cart-group ion-icon,
+.usericon ion-icon {
+    cursor: pointer;
+    
+}
+
+.search, .cart-group, .usericon {
+    margin-right: 20px;
+    font-size: 24px;
+}
+
+/* .container {
+    margin-bottom: 9px;
+    display: flex;
+    flex-direction: row;
+    align-self: flex-start;
+    width: fit-content;
+    box-sizing: border-box;
+} */
+
+
+/* .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+} */
+
+.product {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.product p {
     margin: 5px 0;
 }
 
-.product-details form {
-    display: flex;
-    flex: 1 1 100%;
-    justify-content: space-between;
-    align-items: center;
+.quantity {
+    margin-top: 10px;
 }
 
-.product-details form button {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 4px;
+.quantity button {
+    padding: 5px 10px;
     cursor: pointer;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
 }
 
-.product-details form button:hover {
-    background-color: #45a049;
+.quantity input[type="number"] {
+    width: 50px;
+    text-align: center;
+}
+
+.quantity #selectedQuantity {
+    display: none;
+    font-weight: bold;
+}
+
+.update_quantity {
+    margin-top: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    background-color: #28a745;
+    color: #fff;
+}
+
+.purchased {
+    width: 150px;
+    margin-top: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    background-color: #dc3545;
+    color: #fff;
+}
+.main-box{
+    /* width:100%; */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    margin-left: 20px;
+}
+.cart{
+    margin-left: 20px;
+    margin-bottom: 50px;
+    background-color: rgb(151, 102, 102);
+    height: 370px;
+}
+.quantity button{
+    padding: 0px !important;
 }

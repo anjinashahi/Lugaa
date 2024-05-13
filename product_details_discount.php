@@ -51,7 +51,7 @@
   <!-- Product Details Section -->
   <div class="container">
     <div class="product-details">
-    <div class="product-info">
+    <div>
 
     <!-- fetched data from table -->
     <div class = "fetched">
@@ -218,7 +218,7 @@ function addToCart() {
         if (selectedSize === "") {
         alert("Please select a size before proceeding to checkout.");
         return;
-        }
+    }
 
         // Send an AJAX request to insert data into the database
         var xhttp = new XMLHttpRequest();

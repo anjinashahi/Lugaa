@@ -1,11 +1,16 @@
 
-<?php require 'connection.php'; ?>
+<?php require 'connection.php'; 
+session_start(); 
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Product Name - Lugaa</title>
+  <!-- <link rel="stylesheet" href="css/main.css"> -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="css/p.css">
   <script src="js/p.js" defer></script>
 </head>
@@ -32,17 +37,49 @@
           <div class="line-1"></div>
         </div>
         <div class="topright">
-          <div class="search">
-            <ion-icon name="search"></ion-icon>
-          </div>
+          <form action = "product_search.php" method = "GET">
+                    <div class="input-group mb-3">
+                        <input type="text" name = "query" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <span class="input-group-text" id="basic-addon2">
+                            <button class="search">
+                            <ion-icon name="search"></ion-icon>
+                        </button> 
+                        </span>
+                        </div>
+            </form>
           <div class="cart-group">
-            <a href="cart.php"><ion-icon name="cart-outline"></ion-icon></a>
+            <?php
+                if(isset($_SESSION['logged'])){
+                $loggedInName = $_SESSION['logged'];
+                echo'<a href="cart_test.php">
+                <ion-icon name="cart-outline"></ion-icon>
+                </a>';
+              }
+              else{
+                  echo'<a href="login.php">
+                  <ion-icon name="cart-outline"></ion-icon>
+                  </a>';
+              }
+            ?>
             
           </div>
           <div class="usericon">
-            <a href="profileEditable.php">
-              <ion-icon name="person-circle-outline"></ion-icon>
-            </a>
+            <?php
+              // session_start();
+              if(isset($_SESSION['logged'])){
+                  $loggedInName = $_SESSION['logged'];
+                  echo'<a href="user.php"><ion-icon name="person-circle-outline"></ion-icon></a>';
+  
+                      // <div id = "name">
+                      // </div>
+                      // </a>';
+                }
+              else{
+                  echo'<a href="login.php">
+                  <ion-icon name="person-circle-outline"></ion-icon>
+                  </a>';
+              }
+            ?>
           </div>
         </div>
       </div>
@@ -51,12 +88,11 @@
   <!-- Product Details Section -->
   <div class="container">
     <div class="product-details">
-    <div class="product-info">
 
     <!-- fetched data from table -->
     <div class = "fetched">
 <?php
-session_start(); // Start the session
+// Start the session
 
 // Check if product_id session variable is set
 if(isset($_POST['product_id1'])) {
@@ -75,6 +111,7 @@ if(isset($_POST['product_id1'])) {
           <div class="product-image">
               <img src="img/' . $row['image'] . '" alt="Product Image">
           </div>
+          <div class = "right">
           <div class="product-info">
               <div id = "product_name" style="display: none;">'.$row["product_name"].' </div>
               <p><h2>' . $row["product_name"] . '</h2></p>
@@ -138,6 +175,7 @@ Please Select Size
 </div>
 <button class="buy" onclick="redirectToCheckout()">Buy Now</button>
 <button class="add-to-cart" onclick="addToCart()">Add to Cart</button> <!-- Modified button with onclick event -->
+</div>
 
 ';
 ?>
@@ -218,7 +256,7 @@ function addToCart() {
         if (selectedSize === "") {
         alert("Please select a size before proceeding to checkout.");
         return;
-        }
+    }
 
         // Send an AJAX request to insert data into the database
         var xhttp = new XMLHttpRequest();
@@ -326,5 +364,8 @@ function addToCart() {
 <!-- Icon Links -->
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
 </html>

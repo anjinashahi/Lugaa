@@ -24,7 +24,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } else {
-    echo "Connected successfully!"; // Debugging statement
+    echo '<script>console.log("Connected successfully!")</script>'; // Debugging statement
 }
 
 // Check if form is submitted
@@ -67,7 +67,7 @@ $conn->close();
 
 <body>
     <div class="wrapper">
-        <a href="index.php" class="icon-close">
+        <a href="indexLoggedin.php" class="icon-close">
             <ion-icon name="close-outline"></ion-icon>
         </a>
         <div class="form-box login">

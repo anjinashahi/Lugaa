@@ -109,27 +109,31 @@ if(isset($_SESSION['logged'])) {
         // Output data of each row
         while($row = $result->fetch_assoc()) {
             echo "<div class = 'order_box'>";
-            echo "Order IDS  ";
-            echo "Order ID: " . $row["order_id"]. "<br>";
-            echo "Customer ID: " . $row["customer_id"]. "<br>";
-            echo "Address: " . $row["address"]. "<br>";
-            echo "Phone: " . $row["phone"]. "<br>";
-            echo "Product ID: " . $row["product_id"]. "<br>";
+            
+            
             echo "Color: " . $row["color"]. "<br>";
             echo "Quantity: " . $row["quantity"]. "<br>";
             echo "Size: " . $row["size"]. "<br>";
             echo "Total: " . $row["total"]. "<br>";
-            echo "Order Status: " . $row["order_status"]. "<br>";
-            echo "Single Price: " . $row["singlePrice"]. "<br>";
-            echo "Order Pending: " . $row["order_pending"]. "<br>";
-            echo "Order Completed: " . $row["order_completed"]. "<br>";
-            echo "Image: " . $row["image"]. "<br> <br> <br>";
+            // echo "Order Status: " . $row["order_status"]. "<br>";
+            // echo "Single Price: " . $row["singlePrice"]. "<br>";
+            // echo "Order Pending: " . $row["order_pending"]. "<br>";
+            // echo "Order Completed: " . $row["order_completed"]. "<br>";
+            // echo "Product ID: " . $row["product_id"]. "<br>";
+            // echo "Order IDS  ";
+            // echo "Order ID: " . $row["order_id"]. "<br>";
+            // echo "Customer ID: " . $customer_id. "<br>";
+            // echo "Address: " . $row["address"]. "<br>";
+            // echo "Phone: " . $row["phone"]. "<br>";
+            echo "Image: <img src='img/" . $row["image"] . "' alt=''><br><br><br>";
+
             echo "</div>";
         }
     } else {
         echo "0 results";
     }
 ?>
+
 
 
 

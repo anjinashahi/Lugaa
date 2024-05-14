@@ -114,26 +114,24 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    width: 100%;
   }
   
   .product-image {
     width: 300px;
-    height: 120px;
+    height: auto;
   }
   
   .product-image img {
-    max-width: 100%;
+    width: 100%;
     height: auto;
   }
   
   .product-info {
-    width: 97%;
+    width: 100%;
     margin-bottom: -20px;
   }
   
-  .product-info h2 {
-    margin-top: 150px;
-  }
   .description{
    /* max-width: 100px; */
   }
@@ -465,3 +463,14 @@
     width: fit-content;
     box-sizing: border-box;
   }
+.fetched{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.right{
+  width: 30%;
+  /* margin-left: 50px; */
+}

@@ -4,6 +4,8 @@
 require 'connection.php';
 
 
+session_start();
+
 ?>
 
 
@@ -24,7 +26,7 @@ require 'connection.php';
         
         <div class="header">
             <div class="logo">
-                <a href="index.html"><img src="images/logo221.png" alt="Logo"></a>
+                <img src="images/logo221.png" alt="Logo">
             </div>
             <div class="nav-bar">
                 <div class="nav">
@@ -34,39 +36,63 @@ require 'connection.php';
                     <a href="product_page.php"><span>
                         Products
                     </span></a>
-                    <a href="contactus.html"><span>
+                    <a href="contactus.php"><span>
                         Contact Us
                     </span></a>
                 </div>
                 <div class="line-1"></div>
             </div>
             <div class="topright">
-                <div class="search-container">
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <ion-icon class="btn btn-outline-success" type="submit" name="search-outline"></ion-icon>
-                      </form>
-                </div>
-                
+                <!-- <div class="search">
+                    <ion-icon name="search"></ion-icon>
+                </div> -->
+                <form action = "product_search.php" method = "GET">
+                    <div class="input-group mb-3">
+                        <input type="text" name = "query" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <span class="input-group-text" id="basic-addon2">
+                            <button class="search">
+                            <ion-icon name="search"></ion-icon>
+                        </button> 
+                        </span>
+                        </div>
+                </form>
                 <div class="cart-group">
-                    <a href="cart.php"><ion-icon name="cart-outline"></ion-icon></a>
+                    <?php
                     
+                    if(isset($_SESSION['logged'])){
+                        $loggedInName = $_SESSION['logged'];
+                        echo'<a href="cart_test.php">
+                        <ion-icon name="cart-outline"></ion-icon>
+                        </a>';
+                    }
+                    else{
+                        echo'<a href="login.php">
+                        <ion-icon name="cart-outline"></ion-icon>
+                        </a>';
+                    }
+                    ?>
                 </div>
                 <div class="usericon">
-                    <a href="profileEditable.php">
-                        <ion-icon name="person-circle-outline"></ion-icon>
-                        <div id = "name"><?php
-                        session_start();
-                        if(isset($_SESSION['logged'])){
-                            $loggedInName = $_SESSION['logged'];
-                            echo"User: " . $loggedInName;
-                        }?>
-                        </div>
-                    </a>
+                            <?php
+                            // session_start();
+                            if(isset($_SESSION['logged'])){
+                                $loggedInName = $_SESSION['logged'];
+                                // echo'<a href="user.php">
+                                // User: ' . $loggedInName.'
+                                echo'<a href ="user.php"><ion-icon name="person-circle-outline"></ion-icon></a>';
+                                    // <div id = "name">
+                                    // </div>
+                                    // </a>';
+                }
+                else{
+                    echo'<a href="login.php">
+                    <ion-icon name="person-circle-outline"></ion-icon>
+                    </a>';
+                }
+                ?>
                     
                 </div>
             </div>
-            
         </div>
         <section class="main-section">
             <!-- Catchphrase Section -->
@@ -200,7 +226,8 @@ require 'connection.php';
                         <h2>About Us</h2>
                         <p>
                             &#34;Luga: Your ultimate online shopping destination. Explore curated collections across
-                            fashion.Our sleek design and intuitive features ensure a seamless
+                            fashion,
+                            electronics, home goods, and more. Our sleek design and intuitive features ensure a seamless
                             browsing experience. Discover convenience, style, and satisfaction with Luga.&#34;
                         </p>
                     </div>
@@ -208,32 +235,8 @@ require 'connection.php';
                         <img src="images/modeling.jpeg" alt="model">
                     </div>
                 </div>
-                <!-- Review Section -->
-                <!-- <div class="review-form-container">
-                    <h2>Leave a Review</h2>
-                    <form id="review-form">
-                        <div class="form-group">
-                            <label for="name">Your Name:</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="rating">Rating:</label>
-                            <select id="rating" name="rating" required>
-                                <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733;</option>
-                                <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734;</option>
-                                <option value="3">&#9733;&#9733;&#9733;&#9734;&#9734;</option>
-                                <option value="2">&#9733;&#9733;&#9734;&#9734;&#9734;</option>
-                                <option value="1">&#9733;&#9734;&#9734;&#9734;&#9734;</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="review">Your Review:</label>
-                            <textarea id="review" name="review" rows="4" required></textarea>
-                        </div>
-                        <button type="submit">Submit Review</button>
-                    </form>
-                </div> -->
-                <div class="review-container">
+
+                <!-- <div class="review-container">
                     <div class="review-card">
                         <img src="images/user-1.png" alt="John Doe Profile Picture">
                         <div class="review-content">
@@ -265,14 +268,18 @@ require 'connection.php';
                                 recommend ordering a size up.</div>
                         </div>
                     </div>
-                </div>
-
+                </div> -->
+                <div class = "map">
+                <a href ="https://www.google.com/maps/place/Herald+College+Kathmandu/@27.7120987,85.3281912,17z/data=!3m1!4b1!4m6!3m5!1s0x39eb196de5da5741:0x652792640c70ede9!8m2!3d27.712094!4d85.3307661!16s%2Fg%2F1pyqqt1lz?entry=ttu" target="_blank">
+                <img src="images/map.png">
+                </a>
+            </div>
         </section>
         <!-- Footer Section -->
         <div class="footer">
             <div class="line-2">
             </div>
-            <div class="main-container-6">
+            <div class="container-6">
                 <div class="footerlogo">
                     <div class="logo-1">
                         <img src="images/logo221.png" alt="flogo">
@@ -285,7 +292,7 @@ require 'connection.php';
                     <div class="contact-us-3">
                         Contact Us
                     </div>
-                    <div class="main-container-7">
+                    <div class="container-7">
                         <div class="pin-1">
                             <img src="images/pin1.png" alt="location">
                         </div>
@@ -293,7 +300,7 @@ require 'connection.php';
                             Kathmandu, Nepal
                         </div>
                     </div>
-                    <div class="main-container">
+                    <div class="container">
                         <div class="phone-call-1">
                             <img src="images/phoneCall1.png" alt="phone">
                         </div>
@@ -301,7 +308,7 @@ require 'connection.php';
                             9876543210
                         </div>
                     </div>
-                    <div class="main-container-11">
+                    <div class="container-11">
                         <div class="email-1">
                             <img src="images/email1.png" alt="mail">
                         </div>
@@ -314,7 +321,7 @@ require 'connection.php';
                     <div class="stay-connected">
                         Stay Connected
                     </div>
-                    <div class="main-container-9">
+                    <div class="container-9">
                         <div class="instagram-1">
                             <img src="images/instagram1.png" alt="instagram">
 
@@ -326,7 +333,7 @@ require 'connection.php';
                     </div>
                 </div>
             </div>
-            <div class="main-container-10">
+            <div class="container-10">
                 <div class="copyright-1">
                     <img src="images/copyright1.png" alt="copyright">
                 </div>

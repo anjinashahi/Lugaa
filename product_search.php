@@ -1,5 +1,8 @@
 <?php
-require 'connection.php'; ?>
+require 'connection.php';
+session_start(); 
+
+?>
 
 
 <!DOCTYPE html>
@@ -8,11 +11,7 @@ require 'connection.php'; ?>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lugaa | Product</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  
-  <link rel="stylesheet" href = "css/main.css">
   <style>
     /* Insert the provided CSS from product.css file here */
     <?php include 'css/product.css'; ?>
@@ -33,52 +32,9 @@ require 'connection.php'; ?>
       <div class="line-1"></div>
     </div>
     <div class="topright">
-    <form action = "product_search.php" method = "GET">
-                    <div class="input-group mb-3">
-                        <input type="text" name = "query" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <span class="input-group-text" id="basic-addon2">
-                            <button class="search">
-                            <ion-icon name="search"></ion-icon>
-                        </button> 
-                        </span>
-                        </div>
-                </form>
-      
-      <div class="cart-group">
-      <?php
-                    
-                    if(isset($_SESSION['logged'])){
-                        $loggedInName = $_SESSION['logged'];
-                        echo'<a href="cart_test.php">
-                        <ion-icon name="cart-outline"></ion-icon>
-                        </a>';
-                    }
-                    else{
-                        echo'<a href="login.php">
-                        <ion-icon name="cart-outline"></ion-icon>
-                        </a>';
-                    }
-                    ?>
-      </div>
-      <div class="usericon">
-      <?php
-                            // session_start();
-                            if(isset($_SESSION['logged'])){
-                                $loggedInName = $_SESSION['logged'];
-                                echo'<a href="user.php">
-                                User: ' . $loggedInName.'<ion-icon name="person-circle-outline"></ion-icon>
-                                    <div id = "name">
-                                    </div>
-                                    </a>';
-                }
-                else{
-                    echo'<a href="login.php">
-                    <ion-icon name="person-circle-outline"></ion-icon>
-                    </a>';
-                }
-                ?>
-      </div>
-
+      <div class="search"><ion-icon name="search"></ion-icon></div>
+      <div class="cart-group"><ion-icon name="cart-outline"></ion-icon></div>
+      <div class="usericon"><a href="indexLoggedin.php"><ion-icon name="person-circle-outline"></ion-icon></a></div>
     </div>
   </div>
 
@@ -91,13 +47,23 @@ require 'connection.php'; ?>
         
     <?php 
     error_reporting(E_ALL & ~E_NOTICE);
-    @session_start(); 
-    $result = mysqli_query($conn, "SELECT * FROM product ORDER BY product_id DESC");
-    while ($row = mysqli_fetch_assoc($result)) :
-        $_SESSION['product_id2'] = $row['product_id'];
-         //echo 'id = ' . $_SESSION['product_id2']; 
-?>
-    <div class="product">
+
+            if(isset($_GET['query'])) {
+                $query = $_GET['query'];
+            
+                // Sanitize user input to prevent SQL injection
+                $safe_query = mysqli_real_escape_string($conn, $query);
+            
+                // Execute the search query
+                $raw_results = mysqli_query($conn, "SELECT * FROM product WHERE `product_name` LIKE '%$safe_query%' OR `description` LIKE '%$safe_query%'") or die(mysqli_error($conn));
+            
+                // Check if any results are found
+                if(mysqli_num_rows($raw_results) > 0) {
+                    // Loop through the results and display them
+                    while($row = mysqli_fetch_array($raw_results)) :
+                        // Display search results here
+                        ?>
+                        <div class="product">
         <img src="img/<?php echo $row['image']; ?>" alt="">
         <div class="details">
             <h3><?php echo $row["product_name"]; ?></h3>
@@ -111,13 +77,19 @@ require 'connection.php'; ?>
             </form>
         </div>
     </div>
-<?php endwhile; ?>
+                        <?php
+                    endwhile;
+                } else {
+                    echo "No results found.";
+                }
+            }
+?>
+    
 <?php error_reporting(E_ALL); ?>
         </div>
       </div>
     </section>
   </div>
-
   <!-- Footer Section -->
   <div class="footer">
     <div class="line-2"></div>
@@ -171,12 +143,6 @@ require 'connection.php'; ?>
 
   <!-- JavaScript for product click -->
 
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    
-<!-- Bootstrap Links -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
 </html>
 

@@ -4,6 +4,8 @@
 require 'connection.php';
 
 
+session_start();
+
 ?>
 
 
@@ -34,7 +36,7 @@ require 'connection.php';
                     <a href="product_page.php"><span>
                         Products
                     </span></a>
-                    <a href="contactus.html"><span>
+                    <a href="contactus.php"><span>
                         Contact Us
                     </span></a>
                 </div>
@@ -55,19 +57,39 @@ require 'connection.php';
                         </div>
                 </form>
                 <div class="cart-group">
-                    <ion-icon name="cart-outline"></ion-icon>
+                    <?php
+                    
+                    if(isset($_SESSION['logged'])){
+                        $loggedInName = $_SESSION['logged'];
+                        echo'<a href="cart_test.php">
+                        <ion-icon name="cart-outline"></ion-icon>
+                        </a>';
+                    }
+                    else{
+                        echo'<a href="login.php">
+                        <ion-icon name="cart-outline"></ion-icon>
+                        </a>';
+                    }
+                    ?>
                 </div>
                 <div class="usericon">
-                    <a href="profileEditable.php">
-                        <ion-icon name="person-circle-outline"></ion-icon>
-                        <div id = "name"><?php
-                        session_start();
-                        if(isset($_SESSION['logged'])){
-                            $loggedInName = $_SESSION['logged'];
-                            echo"User: " . $loggedInName;
-                        }?>
-                        </div>
-                    </a>
+                            <?php
+                            // session_start();
+                            if(isset($_SESSION['logged'])){
+                                $loggedInName = $_SESSION['logged'];
+                                // echo'<a href="user.php">
+                                // User: ' . $loggedInName.'
+                                echo'<a href ="user.php"><ion-icon name="person-circle-outline"></ion-icon></a>';
+                                    // <div id = "name">
+                                    // </div>
+                                    // </a>';
+                }
+                else{
+                    echo'<a href="login.php">
+                    <ion-icon name="person-circle-outline"></ion-icon>
+                    </a>';
+                }
+                ?>
                     
                 </div>
             </div>
@@ -213,32 +235,8 @@ require 'connection.php';
                         <img src="images/modeling.jpeg" alt="model">
                     </div>
                 </div>
-                <!-- Review Section -->
-                <!-- <div class="review-form-container">
-                    <h2>Leave a Review</h2>
-                    <form id="review-form">
-                        <div class="form-group">
-                            <label for="name">Your Name:</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="rating">Rating:</label>
-                            <select id="rating" name="rating" required>
-                                <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733;</option>
-                                <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734;</option>
-                                <option value="3">&#9733;&#9733;&#9733;&#9734;&#9734;</option>
-                                <option value="2">&#9733;&#9733;&#9734;&#9734;&#9734;</option>
-                                <option value="1">&#9733;&#9734;&#9734;&#9734;&#9734;</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="review">Your Review:</label>
-                            <textarea id="review" name="review" rows="4" required></textarea>
-                        </div>
-                        <button type="submit">Submit Review</button>
-                    </form>
-                </div> -->
-                <div class="review-container">
+
+                <!-- <div class="review-container">
                     <div class="review-card">
                         <img src="images/user-1.png" alt="John Doe Profile Picture">
                         <div class="review-content">
@@ -270,8 +268,12 @@ require 'connection.php';
                                 recommend ordering a size up.</div>
                         </div>
                     </div>
-                </div>
-
+                </div> -->
+                <div class = "map">
+                <a href ="https://www.google.com/maps/place/Herald+College+Kathmandu/@27.7120987,85.3281912,17z/data=!3m1!4b1!4m6!3m5!1s0x39eb196de5da5741:0x652792640c70ede9!8m2!3d27.712094!4d85.3307661!16s%2Fg%2F1pyqqt1lz?entry=ttu" target="_blank">
+                <img src="images/map.png">
+                </a>
+            </div>
         </section>
         <!-- Footer Section -->
         <div class="footer">

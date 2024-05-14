@@ -1,35 +1,9 @@
-<?php require 'connection.php'; 
+<?php require 
+
+'connection.php'; 
+
+session_start(); // Start the session
 ?>
-
-<?php
-    // session_start(); // Start the session
-
-    // // Display the value of product_id2 sent via POST
-    // if(isset($_POST['product_id2'])) {
-    //     $product_id2 = $_POST['product_id2'];
-    //     echo "Product ID 2: " . $product_id2;
-    //     $result = mysqli_query($conn, "SELECT * FROM product WHERE product_id = $product_id2");
-
-    //     while ($row = mysqli_fetch_assoc($result)) {
-    //         echo '
-    //         <div class="product-image">
-    //             <img src="img/' . $row['image'] . '" alt="Product Image">
-    //         </div>
-    //         <div class="product-info">
-    //             <h2>' . $row["product_name"] . '</h2>
-    //             <p class="description">' . $row["description"] . '</p>
-                
-    //             <p class="price">price:$' . $row["price"] . '</p>
-  
-    //         </div>';}
-
-
-    // } else {
-    //     echo "Product ID 2 is not set via POST request.";
-    // }
-?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,6 +11,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Product Name - Lugaa</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="css/p.css">
   <script src="js/p.js" defer></script>
 </head>
@@ -63,17 +38,49 @@
           <div class="line-1"></div>
         </div>
         <div class="topright">
-          <div class="search">
-            <ion-icon name="search"></ion-icon>
-          </div>
+          <form action = "product_search.php" method = "GET">
+            <div class="input-group mb-3">
+                <input type="text" name = "query" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <span class="input-group-text" id="basic-addon2">
+                    <button class="search">
+                    <ion-icon name="search"></ion-icon>
+                </button> 
+                </span>
+              </div>
+        </form>
           <div class="cart-group">
-            <a href="cart.php"><ion-icon name="cart-outline"></ion-icon></a>
-            
+          <?php
+              if(isset($_SESSION['logged'])){
+                $loggedInName = $_SESSION['logged'];
+                echo'<a href="cart_test.php">
+                <ion-icon name="cart-outline"></ion-icon>
+                </a>';
+              }
+              else{
+                  echo'<a href="login.php">
+                  <ion-icon name="cart-outline"></ion-icon>
+                  </a>';
+              }
+          ?>
           </div>
+
           <div class="usericon">
-            <a href="profileEditable.php">
-              <ion-icon name="person-circle-outline"></ion-icon>
-            </a>
+          <?php
+            // session_start();
+            if(isset($_SESSION['logged'])){
+                $loggedInName = $_SESSION['logged'];
+                echo'<a href="user.php">
+                User: ' . $loggedInName.'<ion-icon name="person-circle-outline"></ion-icon>
+                    <div id = "name">
+                    </div>
+                    </a>';
+            }
+            else{
+                echo'<a href="login.php">
+                <ion-icon name="person-circle-outline"></ion-icon>
+                </a>';
+            }
+          ?>
           </div>
         </div>
       </div>
@@ -82,62 +89,60 @@
   <!-- Product Details Section -->
   <div class="container">
     <div class="product-details">
-    <div class="product-info">
+    <!-- <div class="product-info"> -->
 
     <!-- fetched data from table -->
     <div class = "fetched">
 <?php
-session_start(); // Start the session
+// Start the session
 
 // Check if product_id session variable is set
 if(isset($_POST['product_id2'])) {
     $product_id2 = $_POST['product_id2'];
     //echo "Product ID 2: " . $product_id2;
+    echo  $product_id2;
     $result = mysqli_query($conn, "SELECT * FROM product WHERE product_id = $product_id2");
     $products_ids = $product_id2;
     if(mysqli_num_rows($result) > 0) {
       // Output fetched data
       while ($row = mysqli_fetch_assoc($result)) {
         echo '
-        <div id="product_image" style="display: none;">'. $row['image'] .'</div>
+
         <div class="product-image">
             <img src="img/' . $row['image'] . '" alt="Product Image">
         </div>
+        <div class = "right">
         <div class="product-info">
-            <div id = "product_name" style="display: none;">'.$row["product_name"].' </div>
             
             <p><h2>' . $row["product_name"] . '</h2></p>
             <p id="product_ids" style="display: none;">' . $products_ids. '</p>
 
             <p id = "color">'.$row["color"].'</p>
             <p class="description" id = "description">' . $row["description"] . '</p>
-            <h3>RS</h3><p class="price" id = "price">' . $row["price"] . '</p>
+            <div class="price" id = "price"> <h3>RS ' . $row["price"] . '</h3></div>
   
-        </div>
-        <div class="product-info" style="display: none;">
-              
-              <p class="price" id = "discounted_price">' . $row["price"] . '</p>
-              
-          </div>
-        
-        '
-        
-        
-        
-        ;
-        echo"<script>console.log('Product ID:', product_id); </script>";
+        </div>';
+      }
+      if(isset($_SESSION['logged'])) {
+        $loggedInName = $_SESSION['logged'];
+        $sql = "SELECT customer_id FROM customers WHERE full_name = '$loggedInName'";
+        $result = $conn->query($sql);
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $customer_id = $row['customer_id'];
+            //echo "User: " . $loggedInName . ", Customer ID: " . $customer_id;
+            //echo'Customer ID:<p id = "customer_id">'.$customer_id.'</p>';
+        } else {
+            echo "No customer found for the logged-in user.";
+        }
+    } else {
+        echo "Session 'logged' is not set.";
       }
      
-      
-
-
-  } else {
+    } else {
       echo "<div class='product-info'>No results found for product ID: $product_id</div>";
   }
 } 
-
-
-
 else {
   echo "<div class='product-info'>Product ID is not set in the session.</div>";
 }
@@ -163,7 +168,8 @@ Please Select Size
 </div>
 <button class="buy" onclick="redirectToCheckout()">Buy Now</button>
 <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
-
+</div>
+</div>
 ';
 ?>
 
@@ -229,6 +235,9 @@ Please Select Size
   window.location.href = url;
 }
 
+function redirectToLogin() {
+  window.location.href = "login.php";
+}
 function addToCart() {
         
         var description = document.getElementById('description').innerText;
@@ -347,5 +356,9 @@ function addToCart() {
 <!-- Icon Links -->
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+<!-- Bootstrap Links -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
 </html>

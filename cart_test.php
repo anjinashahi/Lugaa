@@ -14,7 +14,7 @@
         </div>
         <div class="nav-bar">
             <div class="nav">
-                <a href="index.php"><span>Home</span></a>
+                <a href="indexLoggedin.php"><span>Home</span></a>
                 <a href="product_page.php"><span>Products</span></a>
                 <a href="contactus.html"><span>Contact Us</span></a>
             </div>
@@ -68,7 +68,7 @@
 
     echo '<div class="main-box">';
     if ($result_products && $result_products->num_rows > 0) {
-        echo "<h2>Products with Pending Order Status Purchased by Customer</h2>";
+        // echo "<h2>Products with Pending Order Status Purchased by Customer</h2>";
         
         while ($row_product = $result_products->fetch_assoc()) {
             $orderId = $row_product['order_id'];
@@ -93,9 +93,9 @@
 
                 // echo '<div class="info">';
                 echo '<p id="orderId" style="display: none;">' . $orderId . '</p>';
-                echo '<p>Single Price:</p><p id="singlePrice">' . $singlePrice . '</p>';
-                echo '<p>Total:</p><p id="total">' . intval($quantity) * intval($singlePrice) . '</p>';
-                echo '<p>Quantity:</p><div id="selectedQuantity">' . $quantity . '</div>';
+                echo '<p id="singlePrice">Single Price: ' . $singlePrice . '</p>';
+                echo '<p id="total">Total: ' . intval($quantity) * intval($singlePrice) . '</p>';
+                echo '<div id="selectedQuantity">Quantity: ' . $quantity . '</div>';
                 // echo '</div>';
 
             // Remove unnecessary <br> tags and closing </div> tag
@@ -158,5 +158,12 @@
     }
 </script>
     <link rel="stylesheet" href="cart_edit.css">
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    
+<!-- Bootstrap Links -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -1,5 +1,7 @@
 <?php
-require 'connection.php'; ?>
+require 'connection.php'; 
+session_start();
+?>
 
 
 <!DOCTYPE html>
@@ -28,12 +30,12 @@ require 'connection.php'; ?>
       <div class="nav">
         <span><a href="indexLoggedin.php">Home</a></span>
         <span><a href="product_page.php">Products</a></span>
-        <span><a href="contactus.html">Contact Us</a></span>
+        <span><a href="contactus.php">Contact Us</a></span>
       </div>
       <div class="line-1"></div>
     </div>
     <div class="topright">
-    <form action = "product_search.php" method = "GET">
+      <form action = "product_search.php" method = "GET">
                     <div class="input-group mb-3">
                         <input type="text" name = "query" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
                         <span class="input-group-text" id="basic-addon2">
@@ -62,20 +64,20 @@ require 'connection.php'; ?>
       </div>
       <div class="usericon">
       <?php
-                            // session_start();
-                            if(isset($_SESSION['logged'])){
-                                $loggedInName = $_SESSION['logged'];
-                                echo'<a href="user.php">
-                                User: ' . $loggedInName.'<ion-icon name="person-circle-outline"></ion-icon>
-                                    <div id = "name">
-                                    </div>
-                                    </a>';
-                }
-                else{
-                    echo'<a href="login.php">
-                    <ion-icon name="person-circle-outline"></ion-icon>
-                    </a>';
-                }
+        // session_start();
+        if(isset($_SESSION['logged'])){
+            $loggedInName = $_SESSION['logged'];
+            echo'<a href="user.php"><ion-icon name="person-circle-outline"></ion-icon></a>';
+            // User: ' . $loggedInName.'<ion-icon name="person-circle-outline"></ion-icon>
+                // <div id = "name">
+                // </div>
+                // </a>';
+          }
+          else{
+              echo'<a href="login.php">
+              <ion-icon name="person-circle-outline"></ion-icon>
+              </a>';
+          }
                 ?>
       </div>
 
@@ -84,7 +86,7 @@ require 'connection.php'; ?>
 
   <!-- Product Section -->
   <div class="container">
-    <section class="product">
+    <section >
       <div class="product-section">
         <h2 class="title">Products</h2>
         <div class="product-row">
@@ -98,7 +100,7 @@ require 'connection.php'; ?>
          //echo 'id = ' . $_SESSION['product_id2']; 
 ?>
     <div class="product">
-        <img src="img/<?php echo $row['image']; ?>" alt="">
+        <img src="../img/<?php echo $row['image']; ?>" alt="">
         <div class="details">
             <h3><?php echo $row["product_name"]; ?></h3>
             <p><?php echo $row["price"]; ?></p>

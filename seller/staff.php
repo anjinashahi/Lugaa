@@ -32,27 +32,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['change_password'])) {
     }
 }
 
-// Search functionality
+// Search functionality for regular products
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['search'])) {
         $search_product_id = $_POST['search_product_id'];
         $query = "SELECT * FROM product WHERE product_id = '$search_product_id'";
         $result = mysqli_query($conn, $query);
         $product = mysqli_fetch_assoc($result);
-
-        // Fetch available colors from database
-        $query = "SELECT DISTINCT color FROM product";
-        $color_result = mysqli_query($conn, $query);
-        $colors = mysqli_fetch_all($color_result, MYSQLI_ASSOC);
-    } elseif (isset($_POST['clear_search'])) {
+    } 
+    else{
+        //echo'Not found';
+    }
+    if (isset($_POST['clear_search'])) {
         unset($product);
-    } elseif (isset($_POST['purchase'])) {
+    }
+    if (isset($_POST['purchase'])) {
         $quantity = $_POST['quantity'];
         $product_id = $_POST['product_id'];
         $query = "UPDATE product SET quantity = quantity - $quantity WHERE product_id = '$product_id'";
         mysqli_query($conn, $query);
         $success_msg = "Purchase successful!";
     }
+}
+
+// Search functionality for discounted products
+if (isset($_POST['search_discounted'])) {
+    $search_discounted_product_id = $_POST['search_discounted_product_id'];
+    $query = "SELECT * FROM discounted_product WHERE product_id = '$search_discounted_product_id'";
+    $result = mysqli_query($conn, $query);
+    $discounted_product = mysqli_fetch_assoc($result);
+} 
+if (isset($_POST['clear_discounted_search'])) {
+    unset($discounted_product);
+}
+if (isset($_POST['purchase_discounted'])) {
+    $quantity = $_POST['discounted_quantity'];
+    $discounted_product_id = $_POST['discounted_product_id'];
+    $query = "UPDATE discounted_product SET quantity = quantity - $quantity WHERE product_id = '$discounted_product_id'";
+    mysqli_query($conn, $query);
+    $success_msg = "Purchase successful!";
 }
 ?>
 
@@ -62,117 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Staff Dashboard</title>
-<style>
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-}
-
-.container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    position: relative;
-}
-
-input[type="text"],
-input[type="password"],
-input[type="submit"] {
-    width: calc(100% - 22px);
-    padding: 10px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    border-radius: 5px;
-}
-
-input[type="submit"] {
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-input[type="submit"]:hover {
-    background-color: #45a049;
-}
-
-.error {
-    color: red;
-}
-
-.success {
-    color: green;
-}
-
-.product-image {
-    max-width: 200px;
-    height: auto;
-}
-
-/* Modal styles */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* Logout button styles */
-.logout-button {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    background-color: #f44336;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-}
-
-.logout-button:hover {
-    background-color: #d32f2f;
-}
-
-/* Add icon styles */
-.icon {
-    margin-right: 5px;
-}
-</style>
+<link rel="stylesheet" href="seller.css">
 </head>
 <body>
 
@@ -186,45 +94,72 @@ input[type="submit"]:hover {
     <h3>Your Profile</h3>
     <p>Email: <?php echo $user['email']; ?></p>
 
-    <h3>Search Product</h3>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <label for="search_product_id">Product ID</label>
-        <input type="text" id="search_product_id" name="search_product_id" required>
-        <input type="submit" name="search" value="Search">
-        <?php if (isset($product)): ?>
-            <input type="submit" name="clear_search" value="Clear Search">
-        <?php endif; ?>
-    </form>
-
-    <?php if (isset($product)): ?>
-        <h3>Product Details</h3>
-        <p>Product Name: <?php echo $product['product_name']; ?></p>
-        <p>Description: <?php echo $product['description']; ?></p>
-        <p>Price: $<?php echo $product['price']; ?></p>
+    <!-- Product details for regular products -->
+    <div id="product_details" <?php if (!isset($product)) echo 'style="display:none;"'; ?>>
+        <h3>Search Product</h3>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
-            <p>Quantity: <input type="number" name="quantity" min="1" value="1"></p>
-            <p>Color: 
-                <select>
-                    <?php foreach ($colors as $color): ?>
-                        <option value="<?php echo $color['color']; ?>"><?php echo $color['color']; ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </p>
-            <p>Size:
-                <input type="radio" name="size" value="m" checked>M
-                <input type="radio" name="size" value="l">L
-                <input type="radio" name="size" value="xl">XL
-            </p>
-            <?php if (!empty($product['photo'])): ?>
-                <img src="data:image/jpeg;base64,<?php echo base64_encode($product['photo']); ?>" class="product-image" alt="Product Image">
+            <label for="search_product_id">Product ID</label>
+            <input type="text" id="search_product_id" name="search_product_id" required>
+            <input type="submit" name="search" value="Search">
+            <?php if (isset($product)): ?>
+                <input type="submit" name="clear_search" value="Clear Search">
             <?php endif; ?>
-            <input type="submit" name="purchase" value="Purchase">
         </form>
-    <?php endif; ?>
+
+        <?php if (isset($product)): ?>
+            <h3>Product Details</h3>
+            <p>Product Name: <?php echo $product['product_name']; ?></p>
+            <p>Description: <?php echo $product['description']; ?></p>
+            <p>Price: $<?php echo $product['price']; ?></p>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
+                <p>Quantity: <input type="number" name="quantity" min="1" value="1"></p>
+                <p>Color: <?php echo $product['image'] ?></p>
+                
+                
+                <p style="width: 300px; height: auto;"> <!-- Adjust width as needed -->
+                    <img src="../img/<?php echo $product['image']; ?>" alt="" style="width: 100%; height: auto;" />
+                </p>
+                
+                <input type="submit" name="purchase" value="Purchase">
+            </form>
+        <?php endif; ?>
+    </div>
+
+    <!-- Discounted product details -->
+    <div id="discounted_product_details" <?php if (!isset($discounted_product)) echo 'style="display:none;"'; ?>>
+        <h3>Search Discounted Product</h3>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <label for="search_discounted_product_id">Discounted Product ID</label>
+            <input type="text" id="search_discounted_product_id" name="search_discounted_product_id" required>
+            <input type="submit" name="search_discounted" value="Search">
+            <?php if (isset($discounted_product)): ?>
+                <input type="submit" name="clear_discounted_search" value="Clear Search">
+            <?php endif; ?>
+        </form>
+
+        <?php if (isset($discounted_product)): ?>
+            <h3>Discounted Product Details</h3>
+            <p>Product Name: <?php echo $discounted_product['product_name']; ?></p>
+            <p>Description: <?php echo $discounted_product['description']; ?></p>
+            <p>Original Price: $<?php echo $discounted_product['actual_price']; ?></p>
+            <p>Discounted Price: $<?php echo $discounted_product['discounted_price']; ?></p>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                <input type="hidden" name="discounted_product_id" value="<?php echo $discounted_product['product_id']; ?>">
+                <p>Quantity: <input type="number" name="discounted_quantity" min="1" value="1"></p>
+                <p>Color: <?php echo $discounted_product['color']; ?></p>
+               
+                <p style="width: 300px; height: auto;"> <!-- Adjust width as needed -->
+                    <img src="../img/<?php echo $discounted_product['image']; ?>" alt="" style="width: 100%; height: auto;" />
+                </p>
+                <input type="submit" name="purchase_discounted" value="Purchase">
+            </form>
+        <?php endif; ?>
+    </div>
 
     <!-- Change password button -->
-    <button onclick="document.getElementById('changePasswordModal').style.display='block'"><span class="icon">&#x1F512;</span>Change Password</button>
+    <button onclick="toggleProduct('product_details')">Show Regular Product</button>
+    <button onclick="toggleProduct('discounted_product_details')">Show Discounted Product</button>
 
     <!-- Change password modal -->
     <div id="changePasswordModal" class="modal">
@@ -251,14 +186,13 @@ input[type="submit"]:hover {
 </div>
 
 <script>
-// Get the modal
-var modal = document.getElementById('changePasswordModal');
+function toggleProduct(product) {
+    var productDetails = document.getElementById(product);
+    var otherProduct = (product === 'product_details') ? 'discounted_product_details' : 'product_details';
+    var otherProductDetails = document.getElementById(otherProduct);
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
+    productDetails.style.display = 'block';
+    otherProductDetails.style.display = 'none';
 }
 </script>
 

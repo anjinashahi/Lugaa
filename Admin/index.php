@@ -1,70 +1,84 @@
 <?php
+include 'session_check.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Database connection parameters
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "collab_main";
 
-// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Check if form is submitted for delivering an order
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delivered_order_id'])) {
     $delivered_order_id = $_POST['delivered_order_id'];
 
-    // Update order status to "Delivered" in the database
-    $sqlUpdate = "UPDATE order_details SET order_completed = 1 WHERE order_id = $delivered_order_id";
-
-    if ($conn->query($sqlUpdate) !== TRUE) {
-        echo "Error updating record: " . $conn->error;
+    // Use prepared statements to prevent SQL injection
+    $stmt = $conn->prepare("UPDATE order_details SET order_completed = 1, order_pending = 0 WHERE order_id = ?");
+    $stmt->bind_param("i", $delivered_order_id);
+    
+    if ($stmt->execute() === TRUE) {
+        echo "Order marked as delivered successfully.";
+    } else {
+        echo "Error updating record: " . $stmt->error;
     }
+
+    $stmt->close();
 }
 
-// SQL query to fetch product names and quantities
-$sqlProduct = "SELECT product_name, quantity FROM product"; 
-
+$sqlProduct = "SELECT product_id, product_name, quantity FROM product"; 
 $productResult = $conn->query($sqlProduct);
 
 $productData = array();
 
-// Process product query result
 if ($productResult) {
     while($row = $productResult->fetch_assoc()) {
-        $productData[$row['product_name']] = $row['quantity'];
+        $productData[$row['product_id']] = array('product_name' => $row['product_name'], 'quantity' => $row['quantity']);
     }
 } else {
     echo "Error: " . $conn->error;
 }
 
-// SQL query to fetch order details
-$sqlOrder = "SELECT order_id, customer_id, address, phone, order_completed FROM order_details";
-
+// Fetch pending orders where order_pending = 1 and order_completed = 0
+$sqlOrder = "SELECT order_id, customer_id, size, phone, product_id FROM order_details WHERE order_completed = 0";
 $orderResult = $conn->query($sqlOrder);
 
 $orderData = array();
 
-// Process order query result
 if ($orderResult) {
     if ($orderResult->num_rows > 0) {
         while($row = $orderResult->fetch_assoc()) {
             $orderData[] = $row;
         }
     } else {
-        echo "No orders found.";
+        echo "No pending orders found.";
     }
 } else {
     echo "Error executing query: " . $conn->error;
 }
 
-// Close connection
+// Fetch completed orders where order_completed = 1
+$sqlCompletedOrders = "SELECT order_id, customer_id, size, phone, product_id FROM order_details WHERE order_completed = 1";
+$completedOrdersResult = $conn->query($sqlCompletedOrders);
+
+$completedOrdersData = array();
+
+if ($completedOrdersResult) {
+    if ($completedOrdersResult->num_rows > 0) {
+        while($row = $completedOrdersResult->fetch_assoc()) {
+            $completedOrdersData[] = $row;
+        }
+    } else {
+        echo "No completed orders found.";
+    }
+} else {
+    echo "Error executing query: " . $conn->error;
+}
+
 $conn->close();
 ?>
 
@@ -73,116 +87,237 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Analytics</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel = "stylesheet " href="./index.css">
-    <link rel = "stylesheet " href="./analytics.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- <style>
-        /* CSS for the first div */
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        html {
+            height: 100%;
+        }
+        body {
+            height: 100%;
+        }
+        ol, ul {
+            padding: 0px;
+        }
+        .main-container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            min-height: 100vh;
+            background-color: white;
+            overflow: hidden;
+        }
+        .left {
+            display: flex;
+            flex-direction: column;
+            width: 20%;
+            height: 100%;
+            min-height: 100vh;
+            background-color: #0056b3;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        .left nav ul li {
+            margin: 40% 0;
+            list-style-type: none;
+            border-bottom: #EEE3CB 2px solid;
+            border-top: #EEE3CB 2px solid;
+            padding: 10px 20px;
+        }
+        .left nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+            position: relative;
+        }
+        .admin-name {
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+            position: relative;
+        }
+        .left nav ul li a::after {
+            content: "";
+            width: 0;
+            height: 3px;
+            background: white;
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            transition: 0.5s;
+        }
+        .right {
+            display: flex;
+            flex-direction: column !important;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            padding: 20px;
+        }
         #productChartmain-container {
-            width: 400px; /* Adjust the width as needed */
-            height: 300px; /* Adjust the height as needed */
+            width: 400px;
+            height: 300px;
+            margin: 20px;
         }
-        
-        /* CSS for the second div */
-        #pendingOrdersmain-container {
-            margin-top: 70px; /* Adjust the margin-top as needed */
+        #pendingOrdersmain-container, #completedOrdersmain-container {
+            /* margin-top: 10px; */
+            max-height: 300px;
+            overflow-y: auto;
         }
-        
         table, th, td {
+            margin: 10px;
             border: 1px solid black;
             border-collapse: collapse;
             padding: 5px;
         }
-
-        /* CSS for the delivered orders */
         .delivered {
             background-color: lightgreen;
         }
-    </style> -->
+        h1 {
+            font-size: 30px;
+        }
+        #productChart {
+            margin: 10px;
+        }
+        .table {
+            margin: 15px;
+        }
+    </style>
 </head>
 <body>
-    <div class = "main-container">
-        <div class= "left">
+    <div class="main-container">
+        <div class="left">
             <nav>
                 <ul class="">
-                <li class="admin-login">
-                    <div class="admin-info">
-                        <div class="admin-photo">
-                        <!-- <img src="admin.webp" alt="Admin Photo"> -->
+                    <li class="admin-login">
+                        <div class="admin-info">
+                            <div class="admin-photo">
+                                <!-- <img src="admin.webp" alt="Admin Photo"> -->
+                            </div>
+                            <div class="admin-name">Hello, Admin</div>
                         </div>
-                        <div class="admin-name">Hello, Admin</div>
-                    </div>
-                    <li> <a href = "analytics.php">Analytics</a></li>
-                    <li> <a href = "seller.php">Seller</a></li>
-                    <li> <a href = "product.php">Product</a></li>
-                    <li> <a href = "finance.php">Finance</a></li>
+                        <li> <a href="analytics.php">Analytics</a></li>
+                        <li> <a href="seller.php">Seller</a></li>
+                        <li> <a href="product.php">Product</a></li>
+                        <li> <a href="finance.php">Finance</a></li>
+                        <li> <a href="message.php">Message</a></li>
+                        <li> <a href="logout.php">Logout</a></li>
+                    </li>
                 </ul>
             </nav>
         </div>
         <div class="right">
             <div id="productChartmain-container">
-                <h1>Product Quantity Chart</h1>
-                <canvas id="productChart" width="400" height="300"></canvas>
-                <script>
-                    var productData = <?php echo json_encode($productData); ?>;
-                    var productNames = Object.keys(productData);
-                    var productQuantities = Object.values(productData);
-                    
-                    var ctx = document.getElementById('productChart').getContext('2d');
-                    var myChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: productNames,
-                            datasets: [{
-                                label: 'Analytics',
-                                data: productQuantities,
-                                backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                                borderColor: 'rgba(54, 162, 235, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                y: {
-                                    beginAtZero: true
-                                }
-                            }
-                        }
-                    });
-                </script>
+                <h1>Product Quantity</h1>
+                <canvas id="productChart"></canvas>
             </div>
 
-        <!-- Pending Orders -->
-        <div id="pendingOrdersmain-container">
-            <h1>Pending Orders</h1>
-            <table class= "table table-stripped">
-                <tr>
-                    <th>Order ID</th>
-                    <th>Customer ID</th>
-                    <th>Address</th>
-                    <th>Phone</th>
-                    <th>Action</th>
-                </tr>
-                <?php foreach($orderData as $order): ?>
-                <tr <?php if (isset($order['order_completed']) && $order['order_completed'] == 1) echo 'class="delivered"'; ?>>
-                    <td><?php echo $order['order_id']; ?></td>
-                    <td><?php echo $order['customer_id']; ?></td>
-                    <td><?php echo $order['address']; ?></td>
-                    <td><?php echo $order['phone']; ?></td>
-                    <td>
-                        <form method="post">
-                            <input type="hidden" name="delivered_order_id" value="<?php echo $order['order_id']; ?>">
-                            <input type="submit" value="Delivered">
-                        </form>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </table>
-        </div>
+            <div id="pendingOrdersmain-container">
+                <h1>Pending Orders</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer ID</th>
+                            <th>Size</th>
+                            <th>Phone</th>
+                            <th>Product</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (count($orderData) > 0): ?>
+                            <?php foreach($orderData as $order): ?>
+                                <tr>
+                                    <td><?php echo $order['order_id']; ?></td>
+                                    <td><?php echo $order['customer_id']; ?></td>
+                                    <td><?php echo $order['size']; ?></td>
+                                    <td><?php echo $order['phone']; ?></td>
+                                    <td><?php echo $productData[$order['product_id']]['product_name']; ?></td>
+                                    <td>
+                                        <form method="POST" action="">
+                                            <input type="hidden" name="delivered_order_id" value="<?php echo $order['order_id']; ?>">
+                                            <button type="submit" class="btn btn-success">Delivered</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr><td colspan="6">No pending orders found.</td></tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
 
+            <div id="completedOrdersmain-container">
+                <h1>Completed Orders</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer ID</th>
+                            <th>Size</th>
+                            <th>Phone</th>
+                            <th>Product</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($completedOrdersData as $order): ?>
+                            <tr>
+                                <td><?php echo $order['order_id']; ?></td>
+                                <td><?php echo $order['customer_id']; ?></td>
+                                <td><?php echo $order['size']; ?></td>
+                                <td><?php echo $order['phone']; ?></td>
+                                <td><?php echo $productData[$order['product_id']]['product_name']; ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var ctx = document.getElementById('productChart').getContext('2d');
+            var productData = <?php echo json_encode(array_values($productData)); ?>;
+            var productNames = productData.map(function (product) {
+                return product.product_name;
+            });
+            var productQuantities = productData.map(function (product) {
+                return product.quantity;
+            });
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: productNames,
+                    datasets: [{
+                        label: 'Quantity',
+                        data: productQuantities,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>

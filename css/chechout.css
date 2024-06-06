@@ -47,4 +47,10 @@ body {
   button:focus {
     outline: none;
   }
+  .product-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
   

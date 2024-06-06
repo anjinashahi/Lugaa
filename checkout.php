@@ -1,5 +1,8 @@
 <!-- checkout.html -->
+<?php require 'connection.php'; 
+session_start(); 
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,6 +12,9 @@
   <title>Checkout - Lugaa</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="css/checkout.css">
+  <link rel="stylesheet" href="css/p.css">
+  <!-- <link rel="stylesheet" href="css/main.css"> -->
+
   <script src="js/checkout.js"></script>
 </head>
 
@@ -66,11 +72,12 @@
                             // session_start();
                             if(isset($_SESSION['logged'])){
                                 $loggedInName = $_SESSION['logged'];
-                                echo'<a href="user.php">
-                                User: ' . $loggedInName.'<ion-icon name="person-circle-outline"></ion-icon>
-                                    <div id = "name">
-                                    </div>
-                                    </a>';
+                                echo'<a href="user.php"><ion-icon name="person-circle-outline"></ion-icon></a>';
+  
+                                // User: ' . $loggedInName.'<ion-icon name="person-circle-outline"></ion-icon>
+                                    // <div id = "name">
+                                    // </div>
+                                    // </a>';
                 }
                 else{
                     echo'<a href="login.php">
@@ -91,7 +98,13 @@
 
       <!-- php code for custmer info -->
       <?php 
-session_start(); // Start the session if not already started
+// session_start(); // Start the session if not already started
+// var_dump($_SESSION);
+
+if(!isset($_SESSION['logged'])){
+    header("Location: login.php");
+    die();
+}
 
 $servername = "localhost";
 $username = "root";
@@ -125,15 +138,15 @@ if(isset($_SESSION['logged'])) {
           <form>
           <p><strong>Customer ID:</strong> <?php echo $row['customer_id']; ?></p>
             <div>
-              <label for="fullname">Full Name:</label>
+              <!-- <label for="fullname">Full Name:</label> -->
               <p><strong>Name:</strong> <?php echo $row['full_name']; ?></p>
             </div>
             <div>
-              <label for="email">Email:</label>
-              <p><strong>Phone:</strong> <?php echo $row['email']; ?></p>
+              <!-- <label for="email">Email:</label> -->
+              <p><strong>Email:</strong> <?php echo $row['email']; ?></p>
             </div>
             <div>
-              <label for="phone">Phone Number:</label>
+              <!-- <label for="phone">Phone Number:</label> -->
               <p><strong>Phone:</strong> <?php echo $row['phone_number']; ?></p>
             </div>
           </form>
@@ -180,6 +193,7 @@ $product_image = isset($_GET['product_image']) ? htmlspecialchars($_GET['product
 $product_name = isset($_GET['product_name']) ? htmlspecialchars($_GET['product_name'] ):'';
 $total = strval($quantity * floatval($discounted_price));
 $total2 = strval($quantity * floatval($price));
+echo $discounted_price. " " . $price;
 
 echo"<script>console.log('Product ID:', product_id); </script>";
 
@@ -197,10 +211,12 @@ $address = isset($row['address']) ? $row['address'] : '';
 
 echo "<div class='product'>
       <img src='img/$product_image'>
+      <div class = 'product-info'>
       <p>Name: $product_name</p>
       <p>Size: $size</p>
       <p>Color: $color</p>
-      <p>Product Id: $product_ids</p>";
+      <p>Product Id: $product_ids</p>
+      </div>";
 
 if ($total == 0) {
     echo "<p>Total: \$$total2</p>";
@@ -209,6 +225,19 @@ if ($total == 0) {
 }
 echo "</div>";
 
+
+// echo "<div class='note'>
+//         <form action='submit.php' method='post'>
+//             <label for='message'>Enter your message:</label>
+//             <textarea id='message' name='message' rows='4' cols='50'></textarea>
+//             <br>
+//             <input type='submit' value='Submit'>
+//         </form>
+//       </div>
+  
+//     </form>";
+
+      
 //session_start(); // Start the session
 
 
@@ -232,7 +261,7 @@ if ($conn->connect_error) {
 // Prepare INSERT query
 if(isset($_POST['submit'])){
     $size = strtolower($size);
-    $sql = "INSERT INTO order_details (customer_id, phone, address, size, color, total, quantity, product_id) VALUES (?,?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO order_details (customer_id, phone, address, size, color, total, quantity, product_id, note) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?)";
 
     // Prepare and bind parameters
     $stmt = $conn->prepare($sql);
@@ -243,7 +272,8 @@ if(isset($_POST['submit'])){
     }
     $quantityAsString = strval($quantity);
     //$quantity = integer($quantity);
-    $stmt->bind_param("ssssssss", $customer_id, $phone_number, $address, $size, $color, $totalToInsert, $quantity, $product_ids);
+    $message =  $_POST['message'];
+    $stmt->bind_param("sssssssss", $customer_id, $phone_number, $address, $size, $color, $totalToInsert, $quantity, $product_ids, $_POST['message']);
 
     // Execute the query
     if ($stmt->execute()) {
@@ -261,6 +291,9 @@ if(isset($_POST['submit'])){
           
           <!-- button to place order -->
           <form action="" method="post" >
+          <label for='message'>Enter your message:</label>
+            <textarea id='message' name='message' rows='4' cols='50'></textarea>
+            <br>
             <button class = "place-order" type="submit" name="submit" class = "btn">Submit</button>
           </form>
         </section>
@@ -269,12 +302,12 @@ if(isset($_POST['submit'])){
   </div>
 
 <!-- QR Code Section -->
-<div class="qr-code">
+<!-- <div class="qr-code">
     <h2>QR Code</h2>
     <div class="qr_code">
     <img src="images/qrcode.png" alt="QR Code">
 </div>
-</div>
+</div> -->
 
   <!-- Footer Section -->
   <footer>

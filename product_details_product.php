@@ -1,7 +1,4 @@
-<?php require 
-
-'connection.php'; 
-
+<?php require 'connection.php'; 
 session_start(); // Start the session
 ?>
 
@@ -38,9 +35,9 @@ session_start(); // Start the session
           <div class="line-1"></div>
         </div>
         <div class="topright">
-          <form action = "product_search.php" method = "GET">
+          <form action="product_search.php" method="GET">
             <div class="input-group mb-3">
-                <input type="text" name = "query" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input type="text" name="query" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
                 <span class="input-group-text" id="basic-addon2">
                     <button class="search">
                     <ion-icon name="search"></ion-icon>
@@ -66,14 +63,9 @@ session_start(); // Start the session
 
           <div class="usericon">
           <?php
-            // session_start();
             if(isset($_SESSION['logged'])){
                 $loggedInName = $_SESSION['logged'];
-                echo'<a href="user.php">
-                User: ' . $loggedInName.'<ion-icon name="person-circle-outline"></ion-icon>
-                    <div id = "name">
-                    </div>
-                    </a>';
+                echo'<a href="user.php"><ion-icon name="person-circle-outline"></ion-icon></a>';
             }
             else{
                 echo'<a href="login.php">
@@ -89,38 +81,28 @@ session_start(); // Start the session
   <!-- Product Details Section -->
   <div class="container">
     <div class="product-details">
-    <!-- <div class="product-info"> -->
-
     <!-- fetched data from table -->
-    <div class = "fetched">
+    <div class="fetched">
 <?php
-// Start the session
-
-// Check if product_id session variable is set
 if(isset($_POST['product_id2'])) {
     $product_id2 = $_POST['product_id2'];
-    //echo "Product ID 2: " . $product_id2;
-    echo  $product_id2;
     $result = mysqli_query($conn, "SELECT * FROM product WHERE product_id = $product_id2");
     $products_ids = $product_id2;
     if(mysqli_num_rows($result) > 0) {
-      // Output fetched data
       while ($row = mysqli_fetch_assoc($result)) {
         echo '
-
+        <div id="product_image" style="display: none;">'. $row['image'] .'</div>
         <div class="product-image">
             <img src="img/' . $row['image'] . '" alt="Product Image">
         </div>
-        <div class = "right">
+        <div class="right">
         <div class="product-info">
-            
+            <div id="product_name" style="display: none;">'.$row["product_name"].'</div>
             <p><h2>' . $row["product_name"] . '</h2></p>
             <p id="product_ids" style="display: none;">' . $products_ids. '</p>
-
-            <p id = "color">'.$row["color"].'</p>
-            <p class="description" id = "description">' . $row["description"] . '</p>
-            <div class="price" id = "price"> <h3>RS ' . $row["price"] . '</h3></div>
-  
+            <p id="color">'.$row["color"].'</p>
+            <p class="description" id="description">' . $row["description"] . '</p>
+            RS<div class="price" id="price"> <h3>' . $row["price"] . '</h3></div>
         </div>';
       }
       if(isset($_SESSION['logged'])) {
@@ -130,20 +112,14 @@ if(isset($_POST['product_id2'])) {
         if ($result && $result->num_rows > 0) {
             $row = $result->fetch_assoc();
             $customer_id = $row['customer_id'];
-            //echo "User: " . $loggedInName . ", Customer ID: " . $customer_id;
-            //echo'Customer ID:<p id = "customer_id">'.$customer_id.'</p>';
         } else {
             echo "No customer found for the logged-in user.";
         }
-    } else {
-        echo "Session 'logged' is not set.";
       }
-     
     } else {
       echo "<div class='product-info'>No results found for product ID: $product_id</div>";
-  }
-} 
-else {
+    }
+} else {
   echo "<div class='product-info'>Product ID is not set in the session.</div>";
 }
 
@@ -155,47 +131,44 @@ echo '
 </div>
 Please Select Size
 <div id="selectedSize" style="display: none;"></div>
-<div class="sizes" style="display: none;"> <!-- Hide the sizes class initially -->
+<div class="sizes" style="display: none;">
   <span class="size M">M</span>
   <span class="size L">L</span>
   <span class="size XL">XL</span>
 </div>
 <div class="quantity">
   <button class="decrease">-</button>
-  <input type="number" value="1" id="quantityInput"> <!-- Set default value to 1 -->
+  <input type="number" value="1" id="quantityInput">
   <button class="increase">+</button>
-  <div id="selectedQuantity" style="display: none;">1</div> <!-- Hide the selected quantity initially -->
+  <div id="selectedQuantity" style="display: none;">1</div>
 </div>
 <button class="buy" onclick="redirectToCheckout()">Buy Now</button>
 <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
 </div>
-</div>
-';
+</div>';
 ?>
 
 <script>
+  const isLoggedIn = <?php echo isset($_SESSION['logged']) ? 'true' : 'false'; ?>;
+
   function toggleSize(size) {
       var sizeElements = document.getElementsByClassName('size');
       for (var i = 0; i < sizeElements.length; i++) {
           if (sizeElements[i].classList.contains(size)) {
               sizeElements[i].style.display = 'inline-block';
-              // Update the content of the selectedSize div
               document.getElementById('selectedSize').innerText = size;
           } else {
               sizeElements[i].style.display = 'none';
           }
       }
-      // Show the sizes div after selecting a size
       document.querySelector('.sizes').style.display = 'block';
   }
 
-  // Function to update selected quantity
   document.querySelector('.quantity .increase').addEventListener('click', function() {
       var quantityInput = document.getElementById('quantityInput');
       var selectedQuantity = document.getElementById('selectedQuantity');
       quantityInput.value = parseInt(quantityInput.value) + 1;
       selectedQuantity.innerText = quantityInput.value;
-      // Show the selectedQuantity div after changing the quantity
       selectedQuantity.style.display = 'block';
   });
 
@@ -205,90 +178,85 @@ Please Select Size
       if (parseInt(quantityInput.value) > 1) {
           quantityInput.value = parseInt(quantityInput.value) - 1;
           selectedQuantity.innerText = quantityInput.value;
-          // Show the selectedQuantity div after changing the quantity
           selectedQuantity.style.display = 'block';
       }
   });
 
   function redirectToCheckout() {
-  var description = document.getElementById('description').innerText;
-  var price = document.getElementById('price').innerText;
-  var product_ids = document.getElementById('product_ids').innerText;
-  var selectedSize = document.getElementById('selectedSize').innerText;
-  var color = document.getElementById('color').innerText;
-  var product_image = document.getElementById('product_image').innerText;
-  var product_name = document.getElementById('product_name').innerText;
-  if (selectedSize === "") {
-      alert("Please select a size before proceeding to checkout.");
-      return;
+      if (!isLoggedIn) {
+          window.location.href = "login.php";
+          return;
+      }
+
+      var description = document.getElementById('description').innerText;
+      var price = document.getElementById('price').innerText;
+      var product_ids = document.getElementById('product_ids').innerText;
+      var selectedSize = document.getElementById('selectedSize').innerText;
+      var color = document.getElementById('color').innerText;
+      var product_image = document.getElementById('product_image').innerText;
+      var product_name = document.getElementById('product_name').innerText;
+      if (selectedSize === "") {
+          alert("Please select a size before proceeding to checkout.");
+          return;
+      }
+      var selectedQuantity = document.getElementById('selectedQuantity').innerText;
+      var url = "checkout.php?" +
+                "size=" + encodeURIComponent(selectedSize) +
+                "&quantity=" + encodeURIComponent(selectedQuantity) +
+                "&description=" + encodeURIComponent(description) +
+                "&product_ids=" + encodeURIComponent(product_ids) +
+                "&color=" + encodeURIComponent(color) +
+                "&product_image=" + encodeURIComponent(product_image) +
+                "&product_name=" + encodeURIComponent(product_name) +
+                "&price=" + encodeURIComponent(price);
+      window.location.href = url;
   }
-  var selectedQuantity = document.getElementById('selectedQuantity').innerText;
-  var url = "checkout.php?" +
-            "size=" + encodeURIComponent(selectedSize) +
-            "&quantity=" + encodeURIComponent(selectedQuantity) +
-            "&description=" + encodeURIComponent(description) +
-            "&product_ids=" +encodeURIComponent(product_ids)+
-            "&color="+ encodeURIComponent(color)+
-            "&product_image=" + encodeURIComponent(product_image) +
-            "&product_name=" +encodeURIComponent(product_name) +
-            "&price=" + encodeURIComponent(price);
-  window.location.href = url;
-}
 
-function redirectToLogin() {
-  window.location.href = "login.php";
-}
-function addToCart() {
-        
-        var description = document.getElementById('description').innerText;
-        var discountedPrice = document.getElementById('discounted_price').innerText;
-        var product_ids = document.getElementById('product_ids').innerText;
-        var selectedSize = document.getElementById('selectedSize').innerText;
-        var color = document.getElementById('color').innerText;
-        var productImage = document.getElementById('product_image').innerText;
-        var productName = document.getElementById('product_name').innerText;
-        var selectedQuantity = document.getElementById('selectedQuantity').innerText;
-        if (selectedSize === "") {
-        alert("Please select a size before proceeding to checkout.");
-        return;
-    }
+  function addToCart() {
+      if (!isLoggedIn) {
+          window.location.href = "login.php";
+          return;
+      }
 
-        // Send an AJAX request to insert data into the database
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                alert("Successfully added to cart!");
-            }
-        };
-        xhttp.open("POST", "insert_order_detail.php", true);
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send("size=" + encodeURIComponent(selectedSize) +
-                   "&quantity=" + encodeURIComponent(selectedQuantity) +
-                   "&description=" + encodeURIComponent(description) +
-                   "&product_ids=" +encodeURIComponent(product_ids)+
-                   "&color=" + encodeURIComponent(color) +
-                   "&product_image=" + encodeURIComponent(productImage) +
-                   "&product_name=" + encodeURIComponent(productName) +
-                   "&discounted_price=" + encodeURIComponent(discountedPrice));
-    }
+      var description = document.getElementById('description').innerText;
+      var discountedPrice = document.getElementById('price').innerText;
+      var product_ids = document.getElementById('product_ids').innerText;
+      var selectedSize = document.getElementById('selectedSize').innerText;
+      var color = document.getElementById('color').innerText;
+      var productImage = document.getElementById('product_image').innerText;
+      var productName = document.getElementById('product_name').innerText;
+      var selectedQuantity = document.getElementById('selectedQuantity').innerText;
+      if (selectedSize === "") {
+          alert("Please select a size before proceeding to checkout.");
+          return;
+      }
 
-
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              alert("Successfully added to cart!");
+          }
+      };
+      xhttp.open("POST", "insert_order_detail.php", true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send("size=" + encodeURIComponent(selectedSize) +
+                 "&quantity=" + encodeURIComponent(selectedQuantity) +
+                 "&description=" + encodeURIComponent(description) +
+                 "&product_ids=" + encodeURIComponent(product_ids) +
+                 "&color=" + encodeURIComponent(color) +
+                 "&product_image=" + encodeURIComponent(productImage) +
+                 "&product_name=" + encodeURIComponent(productName) +
+                 "&discounted_price=" + encodeURIComponent(discountedPrice));
+  }
 </script>
-      </div> 
-      <!-- for size  -->
-      
-      
-
+      </div>
     </div>
-    
   </div>
-  
 </div>
 
 <!-- Footer Section -->
 <div class="footer">
-  <div class="line-2">
-  </div>
+  <div class="line-2"></div>
   <div class="container-6">
     <div class="footerlogo">
       <div class="logo-1">
@@ -334,11 +302,9 @@ function addToCart() {
       <div class="container-9">
         <div class="instagram-1">
           <img src="images/instagram1.png" alt="instagram">
-
         </div>
         <div class="facebook-1">
           <img src="images/facebook1.png" alt="facebook">
-
         </div>
       </div>
     </div>

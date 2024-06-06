@@ -1,0 +1,66 @@
+/* Style for main container */
+.main-container {
+    display: flex;
+}
+
+/* Style for left sidebar */
+.left {
+    width: 250px;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+/* Style for navigation links */
+.left nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.left nav ul li {
+    margin-bottom: 10px;
+}
+
+.left nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.left nav ul li a:hover {
+    color: #007bff;
+}
+
+/* Style for right sidebar */
+.right {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+/* Style for message table */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+.table th {
+    background-color: #f0f0f0;
+}
+
+/* Style for delete buttons */
+.btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    color: #fff; /* Change text color on hover */
+}

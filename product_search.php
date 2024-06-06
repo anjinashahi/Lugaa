@@ -11,10 +11,15 @@ session_start();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lugaa | Product</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href = "css/main.css">
+
   <style>
     /* Insert the provided CSS from product.css file here */
     <?php include 'css/product.css'; ?>
+    
   </style>
 </head>
 <body>
@@ -27,14 +32,61 @@ session_start();
       <div class="nav">
         <span><a href="indexLoggedin.php">Home</a></span>
         <span><a href="product_page.php">Products</a></span>
-        <span><a href="contactus.html">Contact Us</a></span>
+        <span><a href="contactus.php">Contact Us</a></span>
       </div>
       <div class="line-1"></div>
     </div>
     <div class="topright">
-      <div class="search"><ion-icon name="search"></ion-icon></div>
+      <!-- <div class="search"><ion-icon name="search"></ion-icon></div>
       <div class="cart-group"><ion-icon name="cart-outline"></ion-icon></div>
-      <div class="usericon"><a href="indexLoggedin.php"><ion-icon name="person-circle-outline"></ion-icon></a></div>
+      <div class="usericon"><a href="indexLoggedin.php"><ion-icon name="person-circle-outline"></ion-icon></a></div> -->
+      <form action = "product_search.php" method = "GET">
+                    <div class="input-group mb-3">
+                        <input type="text" name = "query" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <span class="input-group-text" id="basic-addon2">
+                            <button class="search">
+                            <ion-icon name="search"></ion-icon>
+                        </button> 
+                        </span>
+                        </div>
+                </form>
+      
+      <div class="cart-group">
+      <?php
+                    
+                    if(isset($_SESSION['logged'])){
+                        $loggedInName = $_SESSION['logged'];
+                        echo'<a href="cart_test.php">
+                        <ion-icon name="cart-outline"></ion-icon>
+                        </a>';
+                    }
+                    else{
+                        echo'<a href="login.php">
+                        <ion-icon name="cart-outline"></ion-icon>
+                        </a>';
+                    }
+                    ?>
+      </div>
+      <div class="usericon">
+      <?php
+        // session_start();
+        if(isset($_SESSION['logged'])){
+            $loggedInName = $_SESSION['logged'];
+            echo'<a href="user.php"><ion-icon name="person-circle-outline"></ion-icon></a>';
+            // User: ' . $loggedInName.'<ion-icon name="person-circle-outline"></ion-icon>
+                // <div id = "name">
+                // </div>
+                // </a>';
+            }
+            else{
+                echo'<a href="login.php">
+                <ion-icon name="person-circle-outline"></ion-icon>
+                </a>';
+            }
+                ?>
+      </div>
+
+    </div>
     </div>
   </div>
 
@@ -142,7 +194,13 @@ session_start();
   </div>
 
   <!-- JavaScript for product click -->
-
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    
+<!-- Bootstrap Links -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+</body>
 </body>
 </html>
 

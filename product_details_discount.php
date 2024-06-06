@@ -1,7 +1,8 @@
-
 <?php require 'connection.php'; 
 session_start(); 
 
+// Check if user is logged in
+$isLoggedIn = isset($_SESSION['logged']) ? 'true' : 'false';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,6 +14,10 @@ session_start();
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="css/p.css">
   <script src="js/p.js" defer></script>
+  <script>
+    // JavaScript variable to indicate if the user is logged in
+    var isLoggedIn = <?php echo $isLoggedIn; ?>;
+  </script>
 </head>
 <body>
 
@@ -119,7 +124,7 @@ if(isset($_POST['product_id1'])) {
               <p id = "color">'.$row["color"].'</p>
               <p class="description" id = "description">' . $row["description"] . '</p>
               <p class="price" id = "discounted_price">' . $row["discounted_price"] . '</p>
-              <p class="price" id = "actual_price" style="display: none;">' . $row["actual_price"] . '</p>
+              RS<p class="price" id = "actual_price" style="display: none;">' . $row["actual_price"] . '</p>
 
           </div>';
         }
@@ -137,7 +142,7 @@ if(isset($_POST['product_id1'])) {
               echo "No customer found for the logged-in user.";
           }
       } else {
-          echo "Session 'logged' is not set.";
+          // echo "Session 'logged' is not set.";
       }
 
 
@@ -253,10 +258,16 @@ function addToCart() {
         var productImage = document.getElementById('product_image').innerText;
         var productName = document.getElementById('product_name').innerText;
         var selectedQuantity = document.getElementById('selectedQuantity').innerText;
+
         if (selectedSize === "") {
-        alert("Please select a size before proceeding to checkout.");
-        return;
-    }
+            alert("Please select a size before adding to cart.");
+            return;
+        }
+
+        if (!isLoggedIn) {
+            window.location.href = "login.php";
+            return;
+        }
 
         // Send an AJAX request to insert data into the database
         var xhttp = new XMLHttpRequest();

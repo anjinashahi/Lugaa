@@ -5,21 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seller Management</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel = "stylesheet " href="./seller.css">
+    <link rel="stylesheet" href="./seller.css">
     <style>
         /* CSS for layout */
         .main-container {
             /* margin: 20px; */
         }
         .seller-card {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
-    width: 250px; /* Adjust width as needed */
-    display: inline-block;
-    margin-right: 10px;
-}
-
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            width: 250px;
+            0px; /* Adjust width as needed */
+            display: inline-block;
+            margin-right: 10px;
+        }
         .seller-card img {
             max-width: 100px;
             max-height: 100px;
@@ -66,71 +66,74 @@
     </style>
 </head>
 <body>
-    <div class= "main-container">
-        <div class = "left">
+    <div class="main-container">
+        <div class="left">
             <nav>
                 <ul class="">
-                <li class="admin-login">
-                    <div class="admin-info">
-                        <div class="admin-photo">
-                        <!-- <img src="admin.webp" alt="Admin Photo"> -->
+                    <li class="admin-login">
+                        <div class="admin-info">
+                            <div class="admin-photo">
+                                <!-- <img src="admin.webp" alt="Admin Photo"> -->
+                            </div>
+                            <div class="admin-name">Hello, Admin</div>
                         </div>
-                        <div class="admin-name">Hello, Admin</div>
-                    </div>
-                    <li> <a href = "admin">Analytics</a></li>
-                    <li> <a href = "seller.php">Seller</a></li>
-                    <li> <a href = "product.php">Product</a></li>
-                    <li> <a href = "finance.php">Finance</a></li>
+                        <li><a href="analytics.php">Analytics</a></li>
+                        <li><a href="seller.php">Seller</a></li>
+                        <li><a href="product.php">Product</a></li>
+                        <li><a href="finance.php">Finance</a></li>
+                        <li><a href="message.php">Message</a></li>
+                        <li><a href="logout.php">Logout</a></li>
+                    </li>
                 </ul>
             </nav>
         </div>
         <div class="right">
-            <div class ="button-nav">
-                <!-- <button id="addBtn">Add Seller</button>
-                <button id="deleteBtn">Delete Seller</button> -->
-                <button type="button" id = "addBtn" class="btn btn-primary btn-sm">Add Seller</button>
-                <button type="button" class="btn btn-secondary btn-sm">Delete Seller</button>
+            <div class="button-nav">
+                <button type="button" id="addBtn" class="btn btn-primary btn-sm">Add Seller</button>
+                <button type="button" id="deleteBtn" class="btn btn-secondary btn-sm">Delete Seller</button>
             </div>
-        <div id="sellerCards">
-            <?php
-            // Include database connection
-            $servername = "localhost";
-            $username = "root";
-            $password = "";
-            $dbname = "collab_main";
+            <div id="sellerCards">
+                <?php
+                include 'session_check.php';
+                // Include database connection
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "collab_main";
 
-            // Create connection
-            $conn = new mysqli($servername, $username, $password, $dbname);
+                // Create connection
+                $conn = new mysqli($servername, $username, $password, $dbname);
 
-            // Check connection
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
-
-            // Fetch sellers from database and display as ID cards
-            $sql = "SELECT * FROM seller";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                // Output data of each row
-                while($row = $result->fetch_assoc()) {
-                    echo "<div class='seller-card'>";
-                    echo "<img src='data:image/jpeg;base64," . base64_encode($row['photo']) . "' alt='Seller Photo'>";
-                    echo "<p><strong>Username:</strong> " . $row['username'] . "</p>";
-                    echo "<p><strong>Email:</strong> " . $row['email'] . "</p>";
-                    echo "<p><strong>Full Name:</strong> " . $row['full_name'] . "</p>";
-                    echo "<p><strong>Phone Number:</strong> " . $row['phone_number'] . "</p>";
-                    echo "<p><strong>Address:</strong> " . $row['address'] . "</p>";
-                    echo "<p><strong>Salary:</strong> " . $row['salary'] . "</p>";
-                    echo "</div>";
+                // Check connection
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
                 }
-            } else {
-                echo "0 results";
-            }
-            $conn->close();
-            ?>
+
+                // Fetch sellers from database and display as ID cards
+                $sql = "SELECT * FROM seller";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    // Output data of each row
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<div class='seller-card'>";
+                        echo "<img src='data:image/jpeg;base64," . base64_encode($row['photo']) . "' alt='Seller Photo'>";
+                        echo "<p><strong>Username:</strong> " . $row['username'] . "</p>";
+                        echo "<p><strong>Email:</strong> " . $row['email'] . "</p>";
+                        echo "<p><strong>Full Name:</strong> " . $row['full_name'] . "</p>";
+                        echo "<p><strong>Phone Number:</strong> " . $row['phone_number'] . "</p>";
+                        echo "<p><strong>Address:</strong> " . $row['address'] . "</p>";
+                        echo "<p><strong>Salary:</strong> " . $row['salary'] . "</p>";
+                        echo "</div>";
+                    }
+                } else {
+                    echo "0 results";
+                }
+                $conn->close();
+                ?>
             </div>
         </div>
+    </div>
 
     <!-- Modal for Add Seller -->
     <div id="addModal" class="modal">
@@ -160,32 +163,52 @@
             </form>
         </div>
     </div>
-</div>
+
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form id="deleteForm" method="post">
+                <label for="delete_username">Username:</label><br>
+                <input type="text" id="delete_username" name="delete_username" required><br>
+                <button type="submit" name="delete_seller">Delete Seller</button>
+            </form>
+        </div>
+    </div>
 
     <script>
-        // Get the modal
-        var modal = document.getElementById("addModal");
+        // Get the modals
+        var addModal = document.getElementById("addModal");
+        var deleteModal = document.getElementById("deleteModal");
 
-        // Get the button that opens the modal
-        var btn = document.getElementById("addBtn");
+        // Get the buttons that open the modals
+        var addBtn = document.getElementById("addBtn");
+        var deleteBtn = document.getElementById("deleteBtn");
 
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
+        // Get the <span> elements that close the modals
+        var closeSpan = document.getElementsByClassName("close");
 
-        // When the user clicks the button, open the modal 
-        btn.onclick = function() {
-            modal.style.display = "block";
+        // When the user clicks the buttons, open the corresponding modal
+        addBtn.onclick = function() {
+            addModal.style.display = "block";
         }
 
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
+        deleteBtn.onclick = function() {
+            deleteModal.style.display = "block";
         }
 
-        // When the user clicks anywhere outside of the modal, close it
+        // When the user clicks on <span> (x), close the modals
+        for (var i = 0; i < closeSpan.length; i++) {
+            closeSpan[i].onclick = function() {
+                addModal.style.display = "none";
+                deleteModal.style.display = "none";
+            }
+        }
+
+        // When the user clicks anywhere outside of the modals, close them
         window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
+            if (event.target == addModal || event.target == deleteModal) {
+                addModal.style.display = "none";
+                deleteModal.style.display = "none";
             }
         }
     </script>
@@ -207,28 +230,48 @@
             die("Connection failed: " . $conn->connect_error);
         }
 
-        // Prepare and bind parameters
-        $stmt = $conn->prepare("INSERT INTO seller (seller_id, username, password, email, full_name, phone_number, address, salary, photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssssss", $seller_id, $username, $password, $email, $full_name, $phone_number, $address, $salary, $photo);
+        // Add Seller
+        if (isset($_POST['seller_id'])) {
+            $stmt = $conn->prepare("INSERT INTO seller (seller_id, username, password, email, full_name, phone_number, address, salary, photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssssssss", $seller_id, $username, $password, $email, $full_name, $phone_number, $address, $salary, $photo);
 
-        // Set parameters and execute
-        $seller_id = $_POST['seller_id'];
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $email = $_POST['email'];
-        $full_name = $_POST['fullName'];
-        $phone_number = $_POST['phoneNumber'];
-        $address = $_POST['address'];
-        $salary = $_POST['salary'];
-        $photo = file_get_contents($_FILES['photo']['tmp_name']);
+            // Set parameters and execute
+            $seller_id = $_POST['seller_id'];
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            $email = $_POST['email'];
+            $full_name = $_POST['fullName'];
+            $phone_number = $_POST['phoneNumber'];
+            $address = $_POST['address'];
+            $salary = $_POST['salary'];
+            $photo = file_get_contents($_FILES['photo']['tmp_name']);
 
-        if ($stmt->execute() === TRUE) {
-            echo "<script>alert('New seller added successfully');</script>";
-        } else {
-            echo "<script>alert('Error: " . $sql . "<br>" . $conn->error . "');</script>";
+            if ($stmt->execute() === TRUE) {
+                echo "<script>alert('New seller added successfully');</script>";
+            } else {
+                echo "<script>alert('Error: " . $sql . "<br>" . $conn->error . "');</script>";
+            }
+
+            $stmt->close();
         }
 
-        $stmt->close();
+        // Delete Seller
+        if (isset($_POST['delete_username'])) {
+            $stmt = $conn->prepare("DELETE FROM seller WHERE username = ?");
+            $stmt->bind_param("s", $username);
+
+            // Set parameter and execute
+            $username = $_POST['delete_username'];
+
+            if ($stmt->execute() === TRUE) {
+                echo "<script>alert('Seller deleted successfully');</script>";
+            } else {
+                echo "<script>alert('Error deleting seller: " . $conn->error . "');</script>";
+            }
+
+            $stmt->close();
+        }
+
         $conn->close();
     }
     ?>

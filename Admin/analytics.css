@@ -67,7 +67,7 @@ ol, ul{
     display: flex;
     flex-direction: column !important;
     height: 100%;
-    overflow: hidden;
+    overflow: auto;
     position: relative;
     padding: 20px;
 }
@@ -80,7 +80,7 @@ margin: 20px;
 
 /* CSS for the second div */
 #pendingOrdersmain-container {
-    margin-top: 70px; /* Adjust the margin-top as needed */
+    margin-top: 10px; /* Adjust the margin-top as needed */
 }
 
 /* table, th, td {
@@ -100,4 +100,7 @@ h1{
 }
 .table{
     margin: 15px;
+}
+.completeorder {
+    width: ;
 }

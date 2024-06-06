@@ -72,3 +72,11 @@ ol, ul{
     position: relative;
     padding: 20px;
 }
+
+.form-container {
+    display: flex;
+    justify-content: space-between;
+}
+.form-container > div {
+    width: 48%;
+}
